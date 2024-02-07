@@ -1,0 +1,22 @@
+{
+	"printWidth": 160,
+	"tabWidth": 6,
+	"useTabs": true,
+	"semi": true,
+	"singleQuote": false,
+	"quoteProps": "as-needed",
+	"jsxSingleQuote": false,
+	"trailingComma": "none",
+	"bracketSpacing": false,
+	"bracketSameLine": false,
+	"arrowParens": "always",
+	"requirePragma": false,
+	"insertPragma": false,
+	"proseWrap": "preserve",
+	"htmlWhitespaceSensitivity": "css",
+	"vueIndentScriptAndStyle": false,
+	"endOfLine": "auto",
+	"rangeStart": 0,
+	"plugins": ["prettier-plugin-ejs"],
+	"embeddedLanguageFormatting": "auto"
+}

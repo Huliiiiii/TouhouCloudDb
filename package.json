@@ -1,0 +1,28 @@
+{
+	"dependencies": {
+		"cors": "^2.8.5",
+		"ejs": "^3.1.9",
+		"express": "^4.18.2",
+		"express-joi": "^0.3.1",
+		"joi": "^17.12.1",
+		"mysql2": "^3.9.1",
+		"nodemon": "^3.0.3"
+	},
+	"name": "touhouclouddb",
+	"version": "1.0.0",
+	"main": "app.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"lint:prettier": "prettier --write \"src/**/*.{js,ts,json,tsx,css,less,scss,vue,html,md}\""
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"description": "",
+	"devDependencies": {
+		"eslint": "^8.56.0",
+		"eslint-config-prettier": "^9.1.0",
+		"prettier": "3.2.4",
+		"prettier-plugin-ejs": "^1.0.3"
+	}
+}

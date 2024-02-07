@@ -1,0 +1,12 @@
+body {
+	background-color: #f4f4f4;
+	color: black;
+	display: flex;
+	justify-content: center;
+}
+
+/* ID */
+.ID {
+	color: grey;
+	font-size: smaller;
+}

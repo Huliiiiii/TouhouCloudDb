@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="../style.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>查看专辑 - Touhou Cloud DB</title>
+	</head>
+
+	<body>
+		<div class="header">
+			<a href="../index.html">return to index html</a>
+		</div>
+		<div class="content">
+			<h1>Albums</h1>
+			<table>
+				<tr class="tableHeader">
+					<td>Title</td>
+					<td>Relese Date</td>
+					<td>Publisher/Circle</td>
+					<td>Album Artist</td>
+				</tr>
+
+				<%for (let i=0; i<albumData.length; i++) {%>
+				<tr>
+					<td>
+						<a href="<%= '../album' + albumData[i].albumID %>">
+							<%= albumData[i].title %>
+							<span class="ID"><%= "\[" + "Album" + albumData[i].albumID + "\]" %> </span>
+						</a>
+					</td>
+					<td>
+						<%= formattedDateData[i].releasedDate %>
+					</td>
+					<td>
+						<%= albumData[i].publisher %>
+					</td>
+					<td>
+						<%= albumData[i].artist %>
+					</td>
+				</tr>
+				<%} %>
+			</table>
+		</div>
+	</body>
+</html>
