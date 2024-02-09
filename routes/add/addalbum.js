@@ -12,7 +12,7 @@ app.use(express.urlencoded({extended: false}));
 // });
 
 router.get("/add/album", function (req, res) {
-	res.render("add_album");
+	res.render("./add/add_album");
 });
 
 module.exports = router;

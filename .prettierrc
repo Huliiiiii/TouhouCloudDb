@@ -1,6 +1,5 @@
 {
 	"printWidth": 160,
-	"tabWidth": 6,
 	"useTabs": true,
 	"semi": true,
 	"singleQuote": false,
@@ -17,6 +16,8 @@
 	"vueIndentScriptAndStyle": false,
 	"endOfLine": "auto",
 	"rangeStart": 0,
-	"plugins": ["prettier-plugin-ejs"],
+	"plugins": [
+		"prettier-plugin-ejs"
+	],
 	"embeddedLanguageFormatting": "auto"
 }
