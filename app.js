@@ -11,8 +11,9 @@ app.use(cors());
 const ejs = require("ejs");
 app.set("view engine", "ejs");
 app.set("views", "./views");
-app.use(express.static("./css"));
 
+app.use(express.static("./css"));
+app.use("/src", express.static("./src"));
 //
 
 app.use(express.urlencoded({extended: false}));
@@ -29,7 +30,6 @@ app.use((req, res, next) => {
 
 app.use(require("./index.js"));
 
-const RoutesPath = "./routes";
 // fs.readdir(RoutesPath, async (err, files) => {
 // 	if (!err) {
 // 		for (let i = 0; i < files.length; i++) {
@@ -39,6 +39,7 @@ const RoutesPath = "./routes";
 // 		console.log();
 // 	}
 // });
+const RoutesPath = "./routes";
 const loadRoutes = (app, dir) => {
 	const files = fs.readdirSync(dir);
 	files.forEach((file) => {

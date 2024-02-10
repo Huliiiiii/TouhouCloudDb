@@ -3,7 +3,7 @@ const router = express.Router();
 const app = express();
 app.use(express.urlencoded({extended: false}));
 
-const get_album_page_data = require("./get_album_page_data");
+const get_album_page_data = require("../../functions/get_album_page_data");
 
 router.get("/album:id", async function (req, res) {
 	try {
