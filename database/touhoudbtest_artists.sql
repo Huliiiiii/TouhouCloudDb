@@ -23,12 +23,12 @@ DROP TABLE IF EXISTS `artists`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `artists` (
-  `artistID` int NOT NULL AUTO_INCREMENT,
+  `artist_id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
   `birthDate` date DEFAULT NULL,
   `formedDate` date DEFAULT NULL,
-  `isDelete` tinyint(1) DEFAULT '0',
-  PRIMARY KEY (`artistID`)
+  `is_deleted` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`artist_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

@@ -16,7 +16,7 @@ const pool = mysql.createPool({
 router.get("/list/songs", async function (req, res) {
 	try {
 		const connection = await pool.getConnection();
-		let getAllSongs = "SELECT * FROM touhoudbtest.songs WHERE isDelete = 0";
+		let getAllSongs = "SELECT * FROM touhoudbtest.songs WHERE is_deleted = 0";
 		const [songList] = await connection.query(getAllSongs);
 		connection.release();
 		res.render("list_songs", {songList});

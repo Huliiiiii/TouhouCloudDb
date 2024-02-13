@@ -4,20 +4,19 @@
 	"semi": true,
 	"singleQuote": false,
 	"quoteProps": "as-needed",
-	"jsxSingleQuote": false,
-	"trailingComma": "none",
-	"bracketSpacing": false,
-	"bracketSameLine": false,
+	"trailingComma": "all",
+	"bracketSpacing": true,
+	"bracketSameLine": true,
 	"arrowParens": "always",
 	"requirePragma": false,
 	"insertPragma": false,
 	"proseWrap": "preserve",
 	"htmlWhitespaceSensitivity": "css",
-	"vueIndentScriptAndStyle": false,
 	"endOfLine": "auto",
 	"rangeStart": 0,
 	"plugins": [
 		"prettier-plugin-ejs"
 	],
-	"embeddedLanguageFormatting": "auto"
+	"embeddedLanguageFormatting": "auto",
+	"experimentalTernaries": true
 }

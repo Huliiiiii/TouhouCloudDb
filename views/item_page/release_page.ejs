@@ -5,15 +5,15 @@
 		<link rel="stylesheet" type="text/css" href="../style.css" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<!-- prettier-ignore -->
-		<title><%= album_title + " - " + album_artist_name%></title>
+		<title><%= release_title + " - " + release_artist_name%></title>
 	</head>
 	<body>
 		<div>
 			<a href="../index.html">return to index html</a>
 		</div>
 		<div>
-			<p style="font-size: large"><%= album_title %></p>
-			<p style="font-size: small; color: royalblue"><%= album_artist_name %></p>
+			<p style="font-size: large"><%= release_title %></p>
+			<p style="font-size: small; color: royalblue"><%= release_artist_name %></p>
 			<div>
 				<p>Track Listing</p>
 				<%- track_listing_block %>

@@ -7,6 +7,7 @@ const fs = require("fs");
 app.use(express.urlencoded({extended: false}));
 
 router.get("/", function (req, res) {
+	// eslint-disable-next-line no-undef
 	res.sendFile(__dirname + "/index.html");
 });
 

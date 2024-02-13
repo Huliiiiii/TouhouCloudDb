@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const app = express();
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 
 const mysql = require("mysql2/promise");
 const pool = mysql.createPool({
@@ -9,7 +9,7 @@ const pool = mysql.createPool({
 	user: "root",
 	password: "KitsuneMySQLPw2333==",
 	database: "touhoudbtest",
-	connectionLimit: 10 // Adjust the connection limit as per your requirements
+	connectionLimit: 10, // Adjust the connection limit as per your requirements
 });
 
 async function executeQuery(sql) {
@@ -28,12 +28,14 @@ async function executeQuery(sql) {
 
 router.get("/list/albums", async function (req, res) {
 	try {
-		const albumData = await executeQuery("SELECT * FROM touhoudbtest.albums");
-		const formattedDateData = await executeQuery('SELECT DATE_FORMAT(ReleasedDate, "%Y-%m-%d") AS ReleseDate FROM touhoudbtest.albums');
+		const release_data = await executeQuery("SELECT * FROM touhoudbtest.release");
+		const formattedDateData = await executeQuery('SELECT DATE_FORMAT(release_date, "%Y-%m-%d") AS ReleseDate FROM touhoudbtest.release');
 		res.render("list_albums", {
-			albumData,
-			formattedDateData
+			release_data,
+			formattedDateData,
 		});
+
+		console.log(release_data);
 	} catch (error) {
 		console.log(error);
 		// Handle error
@@ -56,8 +58,8 @@ module.exports = router;
 // 	database: "touhoudbtest"
 // });
 
-// var viewAlbums = "SELECT * FROM touhoudbtest.albums";
-// var formattedDate = 'SELECT DATE_FORMAT(ReleasedDate, "%Y-%m-%d") AS ReleseDate FROM touhoudbtest.albums';
+// var viewAlbums = "SELECT * FROM touhoudbtest.release";
+// var formattedDate = 'SELECT DATE_FORMAT(release_date, "%Y-%m-%d") AS ReleseDate FROM touhoudbtest.release';
 
 // db.query(viewAlbums, function (err, result) {
 // 	if (err) {

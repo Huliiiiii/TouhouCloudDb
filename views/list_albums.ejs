@@ -21,22 +21,22 @@
 					<td>Album Artist</td>
 				</tr>
 
-				<%for (let i=0; i<albumData.length; i++) {%>
+				<%for (let i=0; i<release_data.length; i++) {%>
 				<tr>
 					<td>
-						<a href="<%= '../album' + albumData[i].albumID %>">
-							<%= albumData[i].title %>
-							<span class="ID"><%= "\[" + "Album" + albumData[i].albumID + "\]" %> </span>
+						<a href="<%= '../release' + release_data[i].release_id %>">
+							<%= release_data[i].title %>
+							<span class="ID"><%= "\[" + "Release" + release_data[i].release_id + "\]" %> </span>
 						</a>
 					</td>
 					<td>
-						<%= formattedDateData[i].releasedDate %>
+						<%- `${release_data[i].release_date}` %>
 					</td>
 					<td>
-						<%= albumData[i].publisher %>
+						<%= release_data[i].publisher %>
 					</td>
 					<td>
-						<%= albumData[i].artist %>
+						<%= release_data[i].artist %>
 					</td>
 				</tr>
 				<%} %>

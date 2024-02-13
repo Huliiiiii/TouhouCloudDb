@@ -28,7 +28,7 @@ CREATE TABLE `songs` (
   `artist` json DEFAULT NULL,
   `credits` json DEFAULT NULL,
   `lyrics` json DEFAULT NULL,
-  `isDelete` tinyint(1) NOT NULL DEFAULT '0',
+  `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`songID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;

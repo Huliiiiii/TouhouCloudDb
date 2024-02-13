@@ -2,12 +2,14 @@
 	"env": {
 		"browser": true,
 		"commonjs": true,
-		"es2021": true,
-		"node": true
+		"es2021": true
 	},
 	"extends": ["eslint:recommended", "prettier"],
 	"parserOptions": {
 		"ecmaVersion": "latest"
 	},
-	"rules": {}
+	"rules": {
+		"semi": ["error", "always"],
+		"no-irregular-whitespace": "warn"
+	}
 }

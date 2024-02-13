@@ -23,14 +23,14 @@ DROP TABLE IF EXISTS `albums`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `albums` (
-  `albumID` int NOT NULL AUTO_INCREMENT,
+  `release_id` int NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
-  `releasedDate` date DEFAULT NULL,
+  `release_date` date DEFAULT NULL,
   `publisher` varchar(45) DEFAULT NULL,
   `artist` json DEFAULT NULL,
   `trackList` json DEFAULT NULL,
-  `isDelete` int DEFAULT '0',
-  PRIMARY KEY (`albumID`)
+  `is_deleted` int DEFAULT '0',
+  PRIMARY KEY (`release_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
