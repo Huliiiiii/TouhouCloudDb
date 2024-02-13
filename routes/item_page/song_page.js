@@ -5,7 +5,7 @@ const { pool } = require("../../functions/query.js");
 router.get("/song:id", async function (req, res) {
 	try {
 		const song_id = req.params.id;
-		const [song_result] = await pool.query("SELECT * FROM touhoudbtest.songs WHERE songID = ? AND is_deleted = 0", [song_id]);
+		const [song_result] = await pool.query("SELECT * FROM touhoudbtest.song WHERE song_id = ? AND is_deleted = 0", [song_id]);
 		const [release_result] = await pool.query("SELECT * FROM touhoudbtest.release WHERE JSON_CONTAINS(track_listing, CAST(? AS JSON), '$');", [
 			JSON.stringify(song_id),
 		]);
@@ -14,7 +14,7 @@ router.get("/song:id", async function (req, res) {
 		if (song_result[0].artist) {
 			const songArtist = song_result[0].artist;
 			const artist_ids = Object.keys(song_result[0].credits).concat(songArtist);
-			const artistInfo = "SELECT * FROM touhoudbtest.artists WHERE artist_id IN (?) AND is_deleted = 0";
+			const artistInfo = "SELECT * FROM touhoudbtest.artist WHERE artist_id IN (?) AND is_deleted = 0";
 			[artist_result] = await pool.query(artistInfo, [artist_ids]);
 		}
 

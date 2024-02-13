@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.33, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
 --
 -- Host: localhost    Database: touhoudbtest
 -- ------------------------------------------------------
--- Server version	8.0.33
+-- Server version	8.0.36
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,30 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `artists`
+-- Table structure for table `artist`
 --
 
-DROP TABLE IF EXISTS `artists`;
+DROP TABLE IF EXISTS `artist`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `artists` (
+CREATE TABLE `artist` (
   `artist_id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
-  `birthDate` date DEFAULT NULL,
-  `formedDate` date DEFAULT NULL,
+  `artist_type` varchar(45) DEFAULT NULL,
+  `birth/formed_date` date DEFAULT NULL,
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `is_deleted` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`artist_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `artists`
+-- Dumping data for table `artist`
 --
 
-LOCK TABLES `artists` WRITE;
-/*!40000 ALTER TABLE `artists` DISABLE KEYS */;
-INSERT INTO `artists` VALUES (1,'Nomico',NULL,NULL,0),(2,'Masayoshi Minoshima',NULL,NULL,0),(3,'Alstroemeria Records',NULL,NULL,0),(4,'testArtist4',NULL,NULL,0),(5,'testArtist5',NULL,NULL,0);
-/*!40000 ALTER TABLE `artists` ENABLE KEYS */;
+LOCK TABLES `artist` WRITE;
+/*!40000 ALTER TABLE `artist` DISABLE KEYS */;
+INSERT INTO `artist` VALUES (1,'Nomico',NULL,NULL,'2024-02-13 22:16:00','2024-02-13 22:16:00',0),(2,'Masayoshi Minoshima',NULL,NULL,'2024-02-13 22:16:00','2024-02-13 22:16:00',0),(3,'Alstroemeria Records',NULL,NULL,'2024-02-13 22:16:00','2024-02-13 22:16:00',0),(4,'testArtist4',NULL,NULL,'2024-02-13 22:16:00','2024-02-14 03:31:19',1),(5,'testArtist5',NULL,NULL,'2024-02-13 22:16:00','2024-02-13 22:16:00',0),(6,'Amateras Records',NULL,NULL,'2024-02-14 03:52:01','2024-02-14 03:52:01',0);
+/*!40000 ALTER TABLE `artist` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-02-07 23:11:51
+-- Dump completed on 2024-02-14  4:44:16

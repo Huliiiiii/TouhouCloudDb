@@ -8,7 +8,7 @@ const getReleaseDataByID = async (release_id) => {
 };
 
 const getArtistNamesByID = async (artist_id_arr) => {
-	const [artist_result] = await pool.query("SELECT * FROM touhoudbtest.artists WHERE artist_id IN (?) AND is_deleted = 0", [artist_id_arr]);
+	const [artist_result] = await pool.query("SELECT * FROM touhoudbtest.artist WHERE artist_id IN (?) AND is_deleted = 0", [artist_id_arr]);
 	const getArtistName = (artist_id) => {
 		const matching_artist = artist_result.find((artist) => artist.artist_id == artist_id);
 		return matching_artist ? matching_artist.name : "n/a";
@@ -22,13 +22,13 @@ const generateTrackListingBlock = async (track_listing) => {
 	}
 	const track_nums = track_listing.map((subArr) => subArr[0]);
 	const track_id_arr = track_listing.map((subArr) => subArr[1]);
-	const [song_result] = await pool.query(`SELECT * FROM touhoudbtest.songs WHERE songID IN (${track_id_arr})`);
+	const [song_result] = await pool.query(`SELECT * FROM touhoudbtest.song WHERE song_id IN (${track_id_arr})`);
 	const track_listing_tracks =
 		song_result ?
 			song_result
 				.map((song, i) => {
 					if (song.is_deleted == 0) {
-						return `<tr><td>${track_nums[i]}</td><td><a href="/song${song.songID}">${song.title}</a></td></tr>`;
+						return `<tr><td>${track_nums[i]}</td><td><a href="/song${song.song_id}">${song.title}</a></td></tr>`;
 					} else {
 						return `<tr><td>${track_nums[i]}</td><td>[deleted song]</td></tr>`;
 					}

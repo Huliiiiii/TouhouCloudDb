@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Add Release</title>
+	</head>
+	<body>
+		<form>
+			<h1>添加发行</h1>
+			<div style="display: flex">
+				<div>
+					<table style="width: 400px">
+						<tr>
+							<td>标题</td>
+							<td><input /></td>
+						</tr>
+						<tr>
+							<td>专辑艺术家</td>
+							<td><input id="album_artist_input" /></td>
+						</tr>
+						<tr>
+							<td>覆盖署名</td>
+							<td><input /></td>
+						</tr>
+						<tr>
+							<td>发行日期</td>
+							<td><input type="date" name="" id="" /></td>
+						</tr>
+						<tr>
+							<td>分类器</td>
+							<td><input /></td>
+						</tr>
+					</table>
+				</div>
+				<div>
+					<p>搜索艺术家</p>
+					<input type="text" name="" id="search_credit_artist" placeholder="Artist Name / Artist ID" /><button id="search_credit_artist_btn">搜索</button>
+					<div style="border: 2px rgb(206, 37, 37) solid">
+						<div id="artist_result" style="width: 400px"></div>
+					</div>
+					<script src="../../src/search_artist.js"></script>
+				</div>
+			</div>
+
+			<div style="display: flex">
+				<div>
+					<table style="width: 400px" id="track_listing">
+						<tr>
+							<td>曲目序号</td>
+							<td>曲目</td>
+							<td><button onclick="addTrack()">添加</button></td>
+						</tr>
+					</table>
+				</div>
+				<div>
+					<p>搜索曲目(还没做出来)</p>
+					<input type="text" name="" id="" /><button>搜索</button>
+					<div style="background-color: burlywood; height: 100px">这里是结果</div>
+				</div>
+			</div>
+		</form>
+		<script src="../../src/edit_tracklisting.js"></script>
+	</body>
+</html>
