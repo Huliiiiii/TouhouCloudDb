@@ -1,1 +1,7 @@
 node_modules/
+.vscode/
+# prettier
+.prettierignore
+.prettierrc
+
+test.*

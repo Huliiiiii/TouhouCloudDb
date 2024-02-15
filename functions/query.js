@@ -9,26 +9,26 @@ const pool = mysql2.createPool({
 	queueLimit: 0,
 });
 
-async function get_data(column, table, is_deleted, where) {
-	try {
-		var query = "SELECT " + column + " FROM " + table;
-		if (is_deleted && !where) {
-			query += " WHERE is_deleted = " + is_deleted;
-		}
-		if (where && !is_deleted) {
-			query += " WHERE " + where;
-		}
-		if (where && is_deleted) {
-			query += " WHERE is_deleted = " + is_deleted + " AND " + where;
-		}
-		// console.log("query: " + query);
-		// eslint-disable-next-line no-unused-vars
-		const [result, _] = await pool.query(query);
-		// console.log(result);
-		return result;
-	} catch (error) {
-		console.log(error);
-	}
-}
+// async function get_data(column, table, is_deleted, where) {
+// 	try {
+// 		var query = "SELECT " + column + " FROM " + table;
+// 		if (is_deleted && !where) {
+// 			query += " WHERE is_deleted = " + is_deleted;
+// 		}
+// 		if (where && !is_deleted) {
+// 			query += " WHERE " + where;
+// 		}
+// 		if (where && is_deleted) {
+// 			query += " WHERE is_deleted = " + is_deleted + " AND " + where;
+// 		}
+// 		// console.log("query: " + query);
+// 		// eslint-disable-next-line no-unused-vars
+// 		const [result, _] = await pool.query(query);
+// 		// console.log(result);
+// 		return result;
+// 	} catch (error) {
+// 		console.log(error);
+// 	}
+// }
 
-module.exports = { pool, get_data };
+module.exports = { pool };

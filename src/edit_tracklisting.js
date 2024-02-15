@@ -1,18 +1,19 @@
 /* eslint-disable no-unused-vars */
-let count = 0;
+let track_count = 0;
 
 function addTrack() {
-	count++;
+	track_count++;
 	const trackRow = document.createElement("tr");
-	trackRow.id = `track${count}`;
+	trackRow.id = `track${track_count}`;
+	trackRow.draggable = true;
 	trackRow.innerHTML = `
         <td><input></td>
         <td><input></td>
-        <td><button onclick="removeTrack('track${count}')">删除</button></td>
+        <td><button onclick="removeElementByID('track${track_count}')">删除</button></td>
     `;
 	document.getElementById("track_listing").appendChild(trackRow);
 }
 
-function removeTrack(id) {
+function removeElementByID(id) {
 	document.getElementById(id).remove();
 }

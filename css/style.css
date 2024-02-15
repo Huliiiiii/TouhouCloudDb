@@ -1,7 +1,4 @@
 body {
-	background-color: #f4f4f4;
-	color: black;
-	display: flex;
 	justify-content: center;
 }
 
@@ -9,4 +6,9 @@ body {
 .ID {
 	color: grey;
 	font-size: smaller;
+}
+
+.result_container {
+	justify-content: center;
+	width: 100%;
 }

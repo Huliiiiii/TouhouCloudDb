@@ -18,5 +18,5 @@
 		"prettier-plugin-ejs"
 	],
 	"embeddedLanguageFormatting": "auto",
-	"experimentalTernaries": true
+	"experimentalTernaries": false
 }

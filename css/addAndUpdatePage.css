@@ -13,23 +13,11 @@
 		sans-serif;
 }
 
-body {
-	background-color: #f8f8f8;
-
-	color: rgba(32, 32, 32);
-}
-
-.inputBox {
-	width: 40%;
-	height: 40%;
-	justify-content: center;
-	/*  */
-	background-color: white;
-	border-radius: 35px;
-}
-
+/* form {
+	display: grid;
+} */
 input {
-	margin: 5px 20px 5px 20px;
+	/* margin: 5px 20px 5px 20px; */
 	border: 3px soild;
 	border-color: rgba(128, 128, 128, 0.5);
 	border-radius: 5px;
@@ -41,8 +29,17 @@ input:hover {
 	border-color: rgba(215, 15, 15, 0.8);
 	transition: 0.4s;
 }
+/*
+.inputBox {
+	width: 40%;
+	height: 40%;
+	justify-content: center;
 
-.submitBottom {
+	background-color: white;
+	border-radius: 35px;
+} */
+
+button {
 	display: flex;
 	margin: 10px;
 	/*  */
@@ -53,13 +50,13 @@ input:hover {
 	border-color: rgba(128, 128, 128, 0.5);
 }
 
-.submitBottom:hover {
+button:hover {
 	color: rgb(196, 0, 0);
 	border-color: rgba(215, 15, 15, 0.8);
 	transition: 0.5s;
 }
 
-.return {
+/* .return {
 	display: flex;
 	align-items: center;
 	right: 0;
@@ -74,3 +71,7 @@ input:hover {
 .return a:active {
 	color: rgb(196, 0, 0);
 }
+
+.modify_creadit_aritst_block {
+	display: flex;
+} */
