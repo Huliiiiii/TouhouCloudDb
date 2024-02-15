@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `song`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `song` (
   `song_id` int NOT NULL AUTO_INCREMENT,
-  `title` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `title` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `artist` json DEFAULT NULL,
   `credits` json DEFAULT NULL,
   `lyrics` json DEFAULT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE `song` (
   `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`song_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
