@@ -19,12 +19,10 @@
 					<div>
 						<table id="credit_artist">
 							<tr>
-								<td><p>专辑艺术家</p></td>
+								<td><p>署名艺术家</p></td>
 								<td><button type="button" onclick="addCreditArtist()">+</button></td>
 							</tr>
 						</table>
-
-						<!-- <input/><button type="button" onclick="removeCreaditArtist()">-</button> -->
 					</div>
 					<div style="width: 10%"></div>
 					<div>
@@ -52,10 +50,10 @@
 					<p><input /></p>
 				</div>
 			</div>
-			<script src="../../src/search_artist.js"></script>
+
 			<div style="display: flex">
 				<div>
-					<table style="width: 400px" id="track_listing">
+					<table style="width: 400px; display: grid" id="track_listing">
 						<tr>
 							<td>曲目序号</td>
 							<td>曲目</td>
@@ -64,12 +62,19 @@
 					</table>
 				</div>
 				<div>
-					<p>搜索曲目(还没做出来)</p>
-					<input type="text" name="" id="" /><button>搜索</button>
-					<div style="border: 2px rgb(206, 37, 37) solid">这里是结果</div>
+					<p>搜索曲目</p>
+					<div style="display: flex">
+						<input type="text" name="" id="search_track_listing_input" placeholder="Song Title / Song ID" />
+						<button type="button" id="clear_search__track_listing">清空</button>
+					</div>
+					<div style="border: 2px rgb(206, 37, 37) solid">
+						<div id="song_result_container"></div>
+					</div>
 				</div>
 			</div>
 		</form>
-		<script src="../../src/edit_tracklisting.js"></script>
+		<script src="/src/scripts/little_tools.js"></script>
+		<script src="/src/scripts/search_artist.js"></script>
+		<script src="/src/scripts/edit_tracklisting.js"></script>
 	</body>
 </html>

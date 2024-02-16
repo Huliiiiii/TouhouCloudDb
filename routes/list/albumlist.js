@@ -16,7 +16,7 @@ async function executeQuery(sql) {
 	const connection = await pool.getConnection();
 	try {
 		// eslint-disable-next-line no-unused-vars
-		const [result, _] = await connection.query(sql);
+		const [result] = await connection.query(sql);
 		return result;
 	} catch (error) {
 		console.log(error);

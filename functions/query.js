@@ -23,7 +23,7 @@ const pool = mysql2.createPool({
 // 		}
 // 		// console.log("query: " + query);
 // 		// eslint-disable-next-line no-unused-vars
-// 		const [result, _] = await pool.query(query);
+// 		const [result] = await pool.query(query);
 // 		// console.log(result);
 // 		return result;
 // 	} catch (error) {
