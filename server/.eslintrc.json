@@ -1,0 +1,10 @@
+{
+	"env": {
+		"browser": true,
+		"commonjs": true,
+		"node": true
+	},
+	"extends": ["eslint:recommended", "prettier"],
+	"parserOptions": {},
+	"rules": {}
+}
