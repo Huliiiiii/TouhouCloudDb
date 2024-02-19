@@ -1,4 +1,4 @@
-* {
+/* * {
 	margin: auto;
 	font-family:
 		system-ui,
@@ -11,7 +11,7 @@
 		"Open Sans",
 		"Helvetica Neue",
 		sans-serif;
-}
+} */
 
 /* form {
 	display: grid;
@@ -40,8 +40,8 @@ input:hover {
 } */
 
 button {
-	display: flex;
-	margin: 10px;
+	/* display: flex; */
+	/* margin: 10px; */
 	/*  */
 	color: rgb(74, 74, 74);
 	background-color: white;
@@ -75,3 +75,21 @@ button:hover {
 .modify_creadit_aritst_block {
 	display: flex;
 } */
+
+.artist_name_container {
+	margin: 10px 10px 10px 10px;
+}
+
+.artist_id_input {
+	width: 60%;
+	height: 20%;
+}
+
+.result_container {
+	min-height: 50%;
+}
+
+.separator {
+	width: 20px;
+	height: 20px;
+}
