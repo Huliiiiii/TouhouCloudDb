@@ -19,7 +19,7 @@ async function searchTrackListingSong() {
 	let value = search_track_listing_input.value ? search_track_listing_input.value : [];
 	// 文本需要两个字符触发搜索
 	if ((!isNaN(value) && value.length > 0) || (isNaN(value) && value.length > 1)) {
-		let [data] = await fetchData("song", "song_id, title", "keyword", value);
+		let [data] = await fetchData("song", "id, title", "keyword", value);
 		data = [data];
 		updateSongResult(data, song_result_container);
 	} else {
@@ -28,7 +28,7 @@ async function searchTrackListingSong() {
 }
 function addTrack(song, title) {
 	track_count++;
-	let song_id = song ? song.song_id : "";
+	let id = song ? song.id : "";
 	let track_title = title ? song.title : "";
 	//
 	const track_row = document.createElement("tr");
@@ -39,7 +39,7 @@ function addTrack(song, title) {
 	track_row.innerHTML = `
 		<tr>
 			<td style="width: 10%;"><input name="track_num" ></td>
-			<td style="width: 50%;"><input name="track_id" value="${song_id}" placeholder="Only for Song ID" onchange="this.value = replaceWithRegExp(/[^0-9]/g, '', this.value)" style="width: 100%;"></td>
+			<td style="width: 50%;"><input name="track_id" value="${id}" placeholder="Only for Song ID" onchange="this.value = replaceWithRegExp(/[^0-9]/g, '', this.value)" style="width: 100%;"></td>
 			<td style="width: 14%;"><input name="track_length" style="width: 100%;"/></td>
 			<td style="width: 16%;"><button onclick="removeElementByID('track${track_count}')" style="width: 100%;">移除</button></td>
 			<div>${track_title}</div>
@@ -51,7 +51,7 @@ function addTrack(song, title) {
 	}
 
 	// 曲目数量限制: 30
-	if (!input_id_array.includes(song_id) && document.getElementsByClassName("song_title_container").length < 30) {
+	if (!input_id_array.includes(id) && document.getElementsByClassName("song_title_container").length < 30) {
 		document.getElementById("track_listing").appendChild(track_row);
 	}
 }

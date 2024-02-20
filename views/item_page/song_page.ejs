@@ -9,7 +9,7 @@
 		let artistName = "";
 		if (artistResult) {
 			const artistMap = artistResult.reduce((map, artist) => {
-				map[artist.artist_id] = artist.name;
+				map[artist.id] = artist.name;
 				return map;
 			}, {});
 
@@ -17,7 +17,6 @@
 				.map((id) => artistMap[id])
 				.filter((artist) => artist)
 				.join(" / ");
-
 			artistName = filteredArtists.length >= 0 ? filteredArtists : "N/A";
 		}
 		%>
@@ -39,7 +38,7 @@
 					    <%
 					    let artistMap = {};
 					    for (let artist of artistResult) {
-					    artistMap[artist.artist_id] = artist.name;
+					    artistMap[artist.id] = artist.name;
 					    }
 					    let creditArtistName = artistMap[Object.keys(songResult.credits)[i]] || "n/a";
 					    %>
@@ -49,7 +48,7 @@
 
 			<p>Appears On</p>
 			<% albumResult.forEach(album => { %>
-			<li><a href="<%= '../album' + album.release_id %>"><%= album.title %> - <%= album.publisher %></a></li>
+			<li><a href="<%= '../album' + album.id %>"><%= album.title %> - <%= album.publisher %></a></li>
 			<% } ); %>
 
 			<p>Lyrics</p>

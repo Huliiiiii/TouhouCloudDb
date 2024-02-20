@@ -22,9 +22,9 @@
 				<%for (let i=0; i<songList.length; i++) {%>
 				<tr>
 					<td>
-						<a href="<%='../song' + songList[i].song_id %>">
+						<a href="<%='../song' + songList[i].id %>">
 							<%= songList[i].title %>
-							<span class="ID"> <%= "\[" + "Song" + songList[i].song_id + "\]" %> </span>
+							<span class="ID"> <%= "\[" + "Song" + songList[i].id + "\]" %> </span>
 						</a>
 					</td>
 					<td>

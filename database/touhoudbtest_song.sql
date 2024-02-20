@@ -23,15 +23,16 @@ DROP TABLE IF EXISTS `song`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `song` (
-  `song_id` int NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `title` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `artist` json DEFAULT NULL,
   `credits` json DEFAULT NULL,
+  `duration` time DEFAULT NULL,
   `lyrics` json DEFAULT NULL,
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`song_id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -41,7 +42,7 @@ CREATE TABLE `song` (
 
 LOCK TABLES `song` WRITE;
 /*!40000 ALTER TABLE `song` DISABLE KEYS */;
-INSERT INTO `song` VALUES (1,'Lovelight','[\"3\"]','{\"2\": \"Composer\"}',NULL,'2024-02-13 22:18:56','2024-02-13 22:18:56',0),(2,'Bad Apple!! feat. nomico','[\"3\"]','{\"1\": \"featured, vocalist\", \"2\": \"arranger\", \"5\": \"test\"}','[\"This is Lyrics of Bad Apple\"]','2024-02-13 22:18:56','2024-02-13 22:18:56',0),(3,'test3',NULL,NULL,NULL,'2024-02-13 22:18:56','2024-02-13 22:18:56',0),(4,'Test Song 4 Deleted',NULL,NULL,NULL,'2024-02-13 22:18:56','2024-02-13 22:20:11',1);
+INSERT INTO `song` VALUES (1,'Lovelight',NULL,'{\"2\": \"Composer\"}','04:23:00',NULL,'2024-02-13 22:18:56','2024-02-20 17:24:26',0),(2,'Bad Apple!! feat. nomico','[\"3\"]','{\"1\": \"featured, vocalist\", \"2\": \"arranger\", \"5\": \"test\"}',NULL,'[\"This is Lyrics of Bad Apple\"]','2024-02-13 22:18:56','2024-02-13 22:18:56',0),(3,'test3',NULL,NULL,NULL,NULL,'2024-02-13 22:18:56','2024-02-13 22:18:56',0),(4,'Test Song 4 Deleted',NULL,NULL,NULL,NULL,'2024-02-13 22:18:56','2024-02-13 22:20:11',1);
 /*!40000 ALTER TABLE `song` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-02-16 19:38:17
+-- Dump completed on 2024-02-20 18:38:24

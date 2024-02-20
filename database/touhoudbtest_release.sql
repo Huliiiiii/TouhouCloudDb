@@ -23,13 +23,13 @@ DROP TABLE IF EXISTS `release`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `release` (
-  `release_id` int NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `title` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `release_artist` json DEFAULT NULL,
+  `override_credit_name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `release_date` date DEFAULT NULL,
   `release_type` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `release_format` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `override_credit_name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `publisher` json DEFAULT NULL,
   `catalog_num` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `track_listing` json DEFAULT NULL,
@@ -38,8 +38,8 @@ CREATE TABLE `release` (
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `is_deleted` tinyint(1) DEFAULT '0',
-  PRIMARY KEY (`release_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -48,7 +48,7 @@ CREATE TABLE `release` (
 
 LOCK TABLES `release` WRITE;
 /*!40000 ALTER TABLE `release` DISABLE KEYS */;
-INSERT INTO `release` VALUES (1,'Lovelight','[3]','2007-05-20','Album','CD',NULL,'[\"3\"]',NULL,'[[\"1\", \"1\"], [\"2\", \"2\"], [\"3\", \"4\"]]',NULL,NULL,'2024-02-13 22:17:51','2024-02-13 22:17:51',0),(2,'test','[2, 3]','2007-05-20','EP','Vinyl',NULL,'[\"3\"]',NULL,'[[\"A1\", \"1\"], [\"A2\", \"2\"], [\"B\", \"4\"]]',NULL,NULL,'2024-02-13 22:17:51','2024-02-16 13:14:47',0),(4,'testNA',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2024-02-13 22:17:51','2024-02-13 22:17:51',0);
+INSERT INTO `release` VALUES (1,'Lovelight','[3]',NULL,'2007-12-31','Album','CD',NULL,NULL,'[{\"id\": \"xxx\", \"title\": \"xxx\", \"length\": \"xxx\", \"track_num\": \"xxx\"}]',NULL,NULL,'2024-02-13 22:17:51','2024-02-20 08:47:45',0),(2,'test','[2, 3]',NULL,'2007-05-20','EP','Vinyl','[\"3\"]',NULL,'[[\"A1\", \"1\"], [\"A2\", \"2\"], [\"B\", \"4\"]]',NULL,NULL,'2024-02-13 22:17:51','2024-02-16 13:14:47',0),(4,'testNA',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2024-02-13 22:17:51','2024-02-13 22:17:51',0),(5,'test','[1]',NULL,'2008-02-01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2024-02-19 23:46:25','2024-02-19 23:46:25',0),(6,'Lovelight','[3]',NULL,NULL,NULL,NULL,NULL,NULL,'\"[[\\\"1\\\",\\\"1\\\"],[\\\"2\\\",\\\"2\\\"],[\\\"3\\\",\\\"4\\\"]]\"',NULL,NULL,'2024-02-19 23:52:03','2024-02-19 23:52:03',0),(7,'Lovelight','[3]',NULL,NULL,NULL,NULL,NULL,NULL,'[[\"1\", \"1\"], [\"2\", \"2\"], [\"3\", \"4\"]]',NULL,NULL,'2024-02-19 23:57:10','2024-02-19 23:57:10',0),(8,'Lovelight','[3]',NULL,NULL,NULL,NULL,NULL,NULL,'[[\"1\", \"1\"], [\"2\", \"2\"], [\"3\", \"4\"]]',NULL,NULL,'2024-02-19 23:57:22','2024-02-19 23:57:22',0),(9,'Lovelight','[3]',NULL,NULL,NULL,NULL,NULL,NULL,'[[\"1\", \"1\"], [\"2\", \"2\"], [\"3\", \"4\"]]',NULL,NULL,'2024-02-19 23:58:40','2024-02-19 23:58:40',0),(10,'Lovelight','[3]',NULL,NULL,NULL,NULL,NULL,NULL,'[[\"1\", \"1\"], [\"2\", \"2\"], [\"3\", \"4\"]]',NULL,NULL,'2024-02-19 23:59:26','2024-02-19 23:59:26',0),(11,'Lovelight','[3]',NULL,NULL,NULL,NULL,NULL,NULL,'[{\"id\": 1, \"title\": \"title\", \"length\": \"5:30\", \"track_num\": \"1\"}]',NULL,NULL,'2024-02-20 00:02:01','2024-02-20 08:25:03',0),(12,'Lovelight','[3]',NULL,NULL,NULL,NULL,NULL,NULL,'[{\"id\": 1, \"title\": \"title\", \"length\": \"5:30\", \"track_num\": \"1\"}]',NULL,NULL,'2024-02-20 08:26:05','2024-02-20 08:26:05',0),(13,'Lovelight','[3]',NULL,NULL,NULL,NULL,NULL,NULL,'[{\"id\": 1, \"title\": \"title\", \"length\": \"5:30\", \"track_num\": \"1\"}]',NULL,NULL,'2024-02-20 08:26:20','2024-02-20 08:26:20',0);
 /*!40000 ALTER TABLE `release` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -61,4 +61,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-02-16 19:38:16
+-- Dump completed on 2024-02-20 18:38:24

@@ -23,15 +23,20 @@ DROP TABLE IF EXISTS `artist`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `artist` (
-  `artist_id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `aliases` json DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `name_variant` json DEFAULT NULL,
+  `alias` json DEFAULT NULL,
   `artist_type` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `birth/formed_date` date DEFAULT NULL,
+  `birth_or_formed_date` date DEFAULT NULL,
+  `member_of` json DEFAULT NULL,
+  `members` json DEFAULT NULL,
+  `related_artist` varchar(45) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `ncm_id` int DEFAULT NULL,
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `is_deleted` tinyint(1) DEFAULT '0',
-  PRIMARY KEY (`artist_id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -41,7 +46,7 @@ CREATE TABLE `artist` (
 
 LOCK TABLES `artist` WRITE;
 /*!40000 ALTER TABLE `artist` DISABLE KEYS */;
-INSERT INTO `artist` VALUES (1,'Nomico',NULL,NULL,NULL,'2024-02-13 22:16:00','2024-02-13 22:16:00',0),(2,'Masayoshi Minoshima',NULL,NULL,NULL,'2024-02-13 22:16:00','2024-02-15 12:40:11',0),(3,'Alstroemeria Records','[\"ALR\"]',NULL,NULL,'2024-02-13 22:16:00','2024-02-15 12:29:23',0),(4,'testArtist4',NULL,NULL,NULL,'2024-02-13 22:16:00','2024-02-14 03:31:19',1),(5,'testArtist5',NULL,NULL,NULL,'2024-02-13 22:16:00','2024-02-13 22:16:00',0),(6,'Amateras Records',NULL,NULL,NULL,'2024-02-14 03:52:01','2024-02-14 03:52:01',0),(7,'中文人名测试',NULL,NULL,NULL,'2024-02-14 07:29:13','2024-02-14 07:29:13',0);
+INSERT INTO `artist` VALUES (1,'Nomico',NULL,NULL,'person',NULL,'[\"Alstoemeria Records\"]',NULL,'',NULL,'2024-02-13 22:16:00','2024-02-20 13:45:05',0),(2,'Masayoshi Minoshima',NULL,NULL,'person',NULL,'[\"3\"]',NULL,'',NULL,'2024-02-13 22:16:00','2024-02-20 13:52:12',0),(3,'Alstroemeria Records','[\"ALR\"]',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2024-02-13 22:16:00','2024-02-15 12:29:23',0),(4,'testArtist4',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2024-02-13 22:16:00','2024-02-14 03:31:19',1),(5,'testArtist5',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2024-02-13 22:16:00','2024-02-13 22:16:00',0),(6,'Amateras Records',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2024-02-14 03:52:01','2024-02-14 03:52:01',0),(7,'中文人名测试',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2024-02-14 07:29:13','2024-02-14 07:29:13',0);
 /*!40000 ALTER TABLE `artist` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-02-16 19:38:16
+-- Dump completed on 2024-02-20 18:38:24

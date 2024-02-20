@@ -25,8 +25,8 @@ router.get("/api/search/artist", async (req, res) => {
 			let name = `%${keyword}%`;
 			//
 			let query_statement = isNaN(keyword)
-				? `SELECT ${column} FROM artist WHERE name LIKE ? OR LOWER(alternative_name ->> "$") LIKE LOWER(?) AND is_deleted = 0`
-				: `SELECT ${column} FROM artist WHERE name LIKE ? OR LOWER(alternative_name ->> "$") LIKE LOWER(?) OR artist_id = ? AND is_deleted = 0`;
+				? `SELECT ${column} FROM artist WHERE name LIKE ? OR LOWER(name_variant ->> "$") LIKE LOWER(?) AND is_deleted = 0`
+				: `SELECT ${column} FROM artist WHERE name LIKE ? OR LOWER(name_variant ->> "$") LIKE LOWER(?) OR id = ? AND is_deleted = 0`;
 			// eslint-disable-next-line no-unused-vars
 			const [result] = await pool.query(query_statement, [name, name, keyword]);
 			// console.log(pool.format(query_statement, [name, name, keyword]));
@@ -37,7 +37,7 @@ router.get("/api/search/artist", async (req, res) => {
 			let column = "*";
 			//
 			let id = req.query.id;
-			let query_statement = `SELECT ${column} FROM touhoudbtest.artist WHERE artist_id = ? AND is_deleted = 0 `;
+			let query_statement = `SELECT ${column} FROM touhoudbtest.artist WHERE id = ? AND is_deleted = 0 `;
 			// eslint-disable-next-line no-unused-vars
 			const [result] = await pool.query(query_statement, id);
 			res.send(result);
@@ -61,7 +61,7 @@ router.get("/api/search/song", async (req, res) => {
 			//
 			let query_statement = isNaN(keyword)
 				? `SELECT ${column} FROM touhoudbtest.song WHERE title LIKE ? AND is_deleted = 0`
-				: `SELECT ${column} FROM touhoudbtest.song WHERE title LIKE ? OR song_id = ? AND is_deleted = 0`;
+				: `SELECT ${column} FROM touhoudbtest.song WHERE title LIKE ? OR id = ? AND is_deleted = 0`;
 			// eslint-disable-next-line no-unused-vars
 			// console.log(pool.format(query_statement, [title, keyword]));
 			const [result] = await pool.query(query_statement, [title, keyword]);
@@ -71,7 +71,7 @@ router.get("/api/search/song", async (req, res) => {
 			let column = "*";
 			//
 			let id = req.query.id;
-			let query_statement = `SELECT ${column} FROM touhoudbtest.song WHERE song_id = ? AND is_deleted = 0`;
+			let query_statement = `SELECT ${column} FROM touhoudbtest.song WHERE id = ? AND is_deleted = 0`;
 			// eslint-disable-next-line no-unused-vars
 			const [result] = await pool.query(query_statement, id);
 			// console.log(pool.format(query_statement, id));
@@ -95,7 +95,7 @@ router.get("/api/search/release", async (req, res) => {
 			//
 			let query_statement = isNaN(keyword)
 				? `SELECT ${column} FROM touhoudbtest.release WHERE title LIKE ? AND is_deleted = 0`
-				: `SELECT ${column} FROM touhoudbtest.release WHERE title LIKE ? OR release_id = ? AND is_deleted = 0`;
+				: `SELECT ${column} FROM touhoudbtest.release WHERE title LIKE ? OR id = ? AND is_deleted = 0`;
 			// eslint-disable-next-line no-unused-vars
 			// console.log(pool.format(query_statement, [title, keyword]));
 			const [result] = await pool.query(query_statement, [title, keyword]);
@@ -105,7 +105,7 @@ router.get("/api/search/release", async (req, res) => {
 			let column = "*";
 			//
 			let id = req.query.id;
-			let query_statement = `SELECT ${column} FROM touhoudbtest.release WHERE release_id = ? AND is_deleted = 0`;
+			let query_statement = `SELECT ${column} FROM touhoudbtest.release WHERE id = ? AND is_deleted = 0`;
 			// eslint-disable-next-line no-unused-vars
 			const [result] = await pool.query(query_statement, id);
 			// console.log(pool.format(query_statement, id));

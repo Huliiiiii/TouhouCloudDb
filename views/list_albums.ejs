@@ -24,9 +24,9 @@
 				<%for (let i=0; i<release_data.length; i++) {%>
 				<tr>
 					<td>
-						<a href="<%= '../release' + release_data[i].release_id %>">
+						<a href="<%= '../release' + release_data[i].id %>">
 							<%= release_data[i].title %>
-							<span class="ID"><%= "\[" + "Release" + release_data[i].release_id + "\]" %> </span>
+							<span class="ID"><%= "\[" + "Release" + release_data[i].id + "\]" %> </span>
 						</a>
 					</td>
 					<td>

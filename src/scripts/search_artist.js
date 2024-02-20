@@ -13,7 +13,7 @@ async function searchCreditArtist() {
 	let value = search_credit_artist_input.value ? search_credit_artist_input.value : [];
 	// 文本需要两个字符触发搜索
 	if ((!isNaN(value) && value.length > 0) || (isNaN(value) && value.length > 1)) {
-		let data = await fetchData("artist", "name, artist_id", "keyword", value);
+		let data = await fetchData("artist", "name, id", "keyword", value);
 		updateArtistResult(data, artist_result_container);
 	} else {
 		artist_result_container.innerHTML = "";
@@ -42,46 +42,46 @@ function updateArtistResult(data, result_container) {
 let artist_count = 0;
 // function addCreditArtist(artist, name) {
 // 	artist_count++;
-// 	let artist_id_str = artist ? artist.artist_id : "";
+// 	let id_str = artist ? artist.id : "";
 // 	let artist_name_str = name ? name : "";
 // 	const artist_row = document.createElement("div");
 // 	artist_row.id = `artist${artist_count}`;
-// 	const artist_id_input = document.querySelectorAll(".artist_id_input");
+// 	const id_input = document.querySelectorAll(".id_input");
 // 	artist_row.className = `artist_name_container`;
 // 	artist_row.draggable = true;
 // 	artist_row.innerHTML = `
-// 		<input value="${artist_id_str}" class="artist_id_input" placeholder="Enter artist ID here" type"text" onchange="this.value = replaceWithRegExp(/[^0-9]/g, '', this.value)"  />
+// 		<input value="${id_str}" class="id_input" placeholder="Enter artist ID here" type"text" onchange="this.value = replaceWithRegExp(/[^0-9]/g, '', this.value)"  />
 // 		<button onclick="removeElementByID('artist${artist_count}')">移除</button>
 // 		<div class="artist_name_div">${artist_name_str}</div>`;
 // 	let input_id_array = [];
-// 	for (let i = 0; i < artist_id_input.length; i++) {
-// 		input_id_array.push(Number(artist_id_input[i].value));
+// 	for (let i = 0; i < id_input.length; i++) {
+// 		input_id_array.push(Number(id_input[i].value));
 // 	}
 // 	// 最多五个
-// 	if (!input_id_array.includes(artist_id_str) && document.getElementsByClassName("artist_name_container").length < 5) {
+// 	if (!input_id_array.includes(id_str) && document.getElementsByClassName("artist_name_container").length < 5) {
 // 		document.getElementById("credit_artist").appendChild(artist_row);
 // 	}
 // }
 // bak
 function addCreditArtist(artist, name) {
 	artist_count++;
-	let artist_id_str = artist ? artist.artist_id : "";
+	let id_str = artist ? artist.id : "";
 	let artist_name_str = name ? name : "";
 	const artist_row = document.createElement("div");
 	artist_row.id = `artist${artist_count}`;
-	const artist_id_input = document.querySelectorAll(".artist_id_input");
+	const id_input = document.querySelectorAll(".id_input");
 	artist_row.className = `artist_name_container`;
 	artist_row.draggable = true;
 	artist_row.innerHTML = `
-		<input value="${artist_id_str}" class="artist_id_input" placeholder="Enter artist ID here" type"text" onchange="this.value = replaceWithRegExp(/[^0-9]/g, '', this.value)"  />
+		<input value="${id_str}" class="id_input" placeholder="Enter artist ID here" type"text" onchange="this.value = replaceWithRegExp(/[^0-9]/g, '', this.value)"  />
 		<button onclick="removeElementByID('artist${artist_count}')">移除</button>
 		<div class="artist_name_div">${artist_name_str}</div>`;
 	let input_id_array = [];
-	for (let i = 0; i < artist_id_input.length; i++) {
-		input_id_array.push(Number(artist_id_input[i].value));
+	for (let i = 0; i < id_input.length; i++) {
+		input_id_array.push(Number(id_input[i].value));
 	}
 	// 最多五个
-	if (!input_id_array.includes(artist_id_str) && document.getElementsByClassName("artist_name_container").length < 5) {
+	if (!input_id_array.includes(id_str) && document.getElementsByClassName("artist_name_container").length < 5) {
 		document.getElementById("credit_artist").appendChild(artist_row);
 	}
 }

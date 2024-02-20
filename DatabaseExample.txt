@@ -1,6 +1,6 @@
 {
 	//发行
-	release_id: Number,
+	id: Number,
 	title: String,
 	cover_art: String,
 	release_date: Date,
@@ -8,7 +8,7 @@
 	release_format: String, //example: "CD", "Cassette", "DVD", "Digital", "Streaming", "Tape", "Vinyl", "Other"
 	release_artist: Array, //example: [1, 2, 3]
 	publisher: Array, //example: [1, 2, 3]
-	track_listing: Array, //example: [[TrackNum, song_id], ["1", "1"], ["A1", "3"]]
+	track_listing: Array, //example: [[TrackNum, id], ["1", "1"], ["A1", "3"]]
 	classfier: Object, //example: {"Event": "CM68", "Series": "Pop Culture"}
 	ncm_id: Number, //
 	create_time: Datetime,
@@ -17,10 +17,10 @@
 }
 {
 	//曲目
-	song_id: Number,
+	id: Number,
 	title: String,
 	artist: Array //example: [1, 2, 3]
-	creadits: Object //example {"artist_id": "music_role"}, {"213": "guitar"},
+	creadits: Object //example {"id": "music_role"}, {"213": "guitar"},
 	lyrics: String or JSON //待定
 	create_time: Datetime,
 	update_time: Datetime,
@@ -28,7 +28,7 @@
 }
 {
 	//艺术家
-	artist_id: Number,
+	id: Number,
 	name: String,
 	artist_type: String //example: "Person", "Group"
 	birth/formed_date: Date, //
