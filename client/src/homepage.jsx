@@ -19,13 +19,13 @@ function HomePage() {
 					<a href="/add/song">添加歌曲</a>
 				</li>
 				<li>
-					<a href="/dev/edit/release">添加发行-dev</a>
+					<a href="/dev/edit/release">编辑发行-dev</a>
 				</li>
 				<li>
-					<a href="/add/song">添加歌曲</a>
+					<a href="/dev/edit/release">编辑艺术家-dev</a>
 				</li>
 				<li>
-					<a href="/add/song">添加歌曲</a>
+					<a href="/dev/edit/song">编辑曲目-dev</a>
 				</li>
 			</div>
 		</>

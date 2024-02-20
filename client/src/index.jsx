@@ -4,16 +4,17 @@ import {Router, Route} from "@solidjs/router";
 import {lazy, ErrorBoundary} from "solid-js";
 import "./index.css";
 
-let lazyImport = function (file_path) {
+function lazyImport(file_path) {
 	return lazy(function () {
+		/* @vite-ignore */
 		return import(file_path);
 	});
-};
+}
 
 const routes = [
 	{
 		path: "/",
-		component: lazyImport("/src/routes/home")
+		component: lazyImport("/src/homepage")
 	},
 	{
 		path: "/add",
@@ -48,6 +49,14 @@ const routes = [
 			{
 				path: "/edit/release/:id?",
 				component: lazyImport("/src/routes/dev/edit_release")
+			},
+			{
+				path: "/edit/artist/:id?",
+				component: lazyImport("/src/routes/dev/edit_artist")
+			},
+			{
+				path: "/edit/song/:id?",
+				component: lazyImport("/src/routes/dev/edit_song")
 			}
 		]
 	}
