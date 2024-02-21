@@ -1,16 +1,14 @@
 /* @refresh reload */
 import {render} from "solid-js/web";
-import {Router, Route} from "@solidjs/router";
+import {Route, Router} from "@solidjs/router";
 import {lazy, ErrorBoundary} from "solid-js";
 import "./index.css";
 
 function lazyImport(file_path) {
 	return lazy(function () {
-		/* @vite-ignore */
-		return import(file_path);
+		return import(/* @vite-ignore */ file_path);
 	});
 }
-
 const routes = [
 	{
 		path: "/",
@@ -57,19 +55,35 @@ const routes = [
 			{
 				path: "/edit/song/:id?",
 				component: lazyImport("/src/routes/dev/edit_song")
+			},
+			{
+				path: "/list/song",
+				component: lazyImport("/src/routes/dev/list_song")
+			},
+			{
+				path: "/test",
+				component: lazyImport("/src/routes/dev/test")
 			}
 		]
 	}
 ];
 
-render(function () {
+function App() {
 	return (
 		<>
 			<ErrorBoundary fallback={(err) => err}>
+				<div style={{height: "10%"}}>
+					<button href="#" onClick={() => history.back()}>
+						return
+					</button>
+				</div>
 				<Router>
 					<Route>{routes}</Route>
+					<Route path="*" component={() => <div>404</div>} />
 				</Router>
 			</ErrorBoundary>
 		</>
 	);
-}, document.getElementById("root"));
+}
+
+render(App, document.getElementById("root"));

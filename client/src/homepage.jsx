@@ -27,6 +27,12 @@ function HomePage() {
 				<li>
 					<a href="/dev/edit/song">编辑曲目-dev</a>
 				</li>
+				<li>
+					<a href="/dev/edit/role">编辑音乐角色-dev</a>
+				</li>
+				<li>
+					<a href="/dev/list/song">曲目列表-dev</a>
+				</li>
 			</div>
 		</>
 	);

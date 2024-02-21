@@ -11,6 +11,8 @@
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+
+	display: grid;
 }
 
 a {
@@ -24,10 +26,11 @@ a:hover {
 
 body {
 	margin: 0;
-	display: grid;
 	place-items: center;
 	min-width: 320px;
 	min-height: 100vh;
+
+	display: grid;
 }
 
 h1 {
