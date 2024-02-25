@@ -1,27 +1,64 @@
-var createError = require("http-errors");
-var express = require("express");
-var fs = require("fs");
-var path = require("path");
-
+const createError = require("http-errors");
+const express = require("express");
 var cookieParser = require("cookie-parser");
-var logger = require("morgan");
+const app = express();
 
-var app = express();
+//
+const fs = require("fs");
+const path = require("path");
+//
+const port = 3007;
 
-var cors = require("cors");
+// 跨域请求
+const cors = require("cors");
 app.use(cors());
 
-// view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "jade");
+// 日志
+const morgan = require("morgan");
+app.use(morgan("dev"));
 
-app.use(logger("dev"));
+// 模板引擎
+// eslint-disable-next-line no-unused-vars
+const ejs = require("ejs");
+app.set("view engine", "ejs");
+app.set("views", "./views");
+//
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
-// routes
-const RoutesPath = "./routes";
+
+// 静态资源
+app.use(express.static("./css"));
+app.use("/src", express.static("./src"));
+//
+
+app.use(express.urlencoded({ extended: false }));
+
+app.use((req, res, next) => {
+	res.cc = function (err, status = 1) {
+		res.send({
+			status,
+			message: err instanceof Error ? err.message : err,
+		});
+	};
+	next();
+});
+// 限流
+// const { rateLimit } = require("express-rate-limit");
+// const limiter = rateLimit({
+// 	windowMs: 15 * 60 * 1000, // 15 minutes
+// 	limit: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
+// 	standardHeaders: "draft-7", // draft-6: `RateLimit-*` headers; draft-7: combined `RateLimit` header
+// 	legacyHeaders: false, // Disable the `X-RateLimit-*` headers.
+// 	// store: ... , // Use an external store for consistency across multiple server instances.
+// });
+// app.use(limiter);
+
+// index page
+app.use(require("./index.js"));
+
+// 路由
+const routes_path = "./routes";
 const loadRoutes = (app, dir) => {
 	const files = fs.readdirSync(dir);
 	files.forEach((file) => {
@@ -33,10 +70,8 @@ const loadRoutes = (app, dir) => {
 		}
 	});
 };
+loadRoutes(app, routes_path);
 
-loadRoutes(app, RoutesPath);
-
-// catch 404 and forward to error handler
 app.use(function (req, res, next) {
 	next(createError(404));
 });
@@ -52,4 +87,4 @@ app.use(function (err, req, res, next) {
 	res.render("error");
 });
 
-module.exports = app;
+app.listen(port, () => console.log(`Server runing at http://127.0.0.1:${port}/`));

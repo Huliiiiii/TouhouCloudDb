@@ -33,6 +33,9 @@ function HomePage() {
 				<li>
 					<a href="/dev/list/song">曲目列表-dev</a>
 				</li>
+				<li>
+					<a href="/dev/test">测试页面</a>
+				</li>
 			</div>
 		</>
 	);

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Add Release</title>
+		<link rel="stylesheet" href="/style.css" />
+		<link rel="stylesheet" href="/addAndUpdatePage.css" />
+	</head>
+
+	<body>
+		<form>
+			<h1>添加发行</h1>
+			<div>
+				<div>
+					<h4>标题</h4>
+					<input />
+				</div>
+				<!-- 艺术家 -->
+				<div>
+					<div style="display: flex">
+						<div>
+							<table id="credit_artist">
+								<tr>
+									<td>
+										<h4>发行艺术家</h4>
+									</td>
+									<td><button type="button" onclick="addCreditArtist()">+</button></td>
+								</tr>
+							</table>
+						</div>
+						<div style="width: 10%"></div>
+						<div>
+							<h4>搜索艺术家</h4>
+							<div style="display: flex">
+								<input type="text" name="" id="search_credit_artist_input" placeholder="Artist Name / Artist ID" />
+								<button type="button" id="clear_search_credit_artist">清空</button>
+							</div>
+
+							<div style="border: 2px rgb(206, 37, 37) solid" class="result_container">
+								<div class="result_container" id="artist_result_container"></div>
+							</div>
+						</div>
+					</div>
+					<div>
+						<h4>发行署名</h4>
+						<div>
+							<input type="radio" name="album_credit_name" id="default_album_credit_name" checked />
+							<label for="default_album_credit_name" id="default_album_credit_name_label">Deafult:</label>
+						</div>
+						<div>
+							<input type="radio" name="album_credit_name" id="custom_album_credit_name" />
+							<label for="default_album_credit_name"><input placeholder="自定义" /></label>
+						</div>
+					</div>
+				</div>
+				<div>
+					<p>发行日期</p>
+					<p><input type="date" name="" id="" /></p>
+				</div>
+				<div>
+					<h4>发行类型</h4>
+					<div><input type="radio" id="release_type_album" name="release_type" value="Album" /> <label for="release_type_album">专辑</label></div>
+					<div><input type="radio" id="release_type_ep" name="release_type" value="EP" /> <label for="release_type_ep">EP</label></div>
+					<div><input type="radio" id="release_type_single" name="release_type" value="Single" /> <label for="release_type_single">单曲</label></div>
+					<div>
+						<input type="radio" id="release_type_compilation" name="release_type" value="Compilation" />
+						<label for="release_type_compilation">合集</label>
+					</div>
+					<div>
+						<input type="radio" id="release_type_others" name="release_type" value="Others" />
+						<label for="release_type_others">其他</label>
+					</div>
+				</div>
+				<div>
+					<h4>发行格式</h4>
+					<div><input type="radio" id="release_format_CD" name="release_format" value="CD" /> <label for="release_type_album">CD</label></div>
+					<div><input type="radio" id="release_format_Vinyl" name="release_format" value="Vinyl" /> <label for="release_type_album">Vinyl</label></div>
+					<div><input type="radio" id="release_format_DVD" name="release_format" value="DVD" /> <label for="release_type_album">DVD</label></div>
+				</div>
+				<div>
+					<p>发行商</p>
+					<p><input type="text" name="" id="" /></p>
+				</div>
+				<div>
+					<p>目录编号</p>
+					<p><input type="text" name="" id="" /></p>
+				</div>
+				<div>
+					<p>分类器</p>
+					<p><input /></p>
+				</div>
+			</div>
+
+			<div style="display: flex">
+				<div>
+					<table style="width: 400px; display: grid" id="track_listing">
+						<tr>
+							<td>曲目序号</td>
+							<td>曲目</td>
+							<td><button type="button" onclick="addTrack()">添加</button></td>
+						</tr>
+					</table>
+				</div>
+				<div>
+					<p>搜索曲目</p>
+					<div style="display: flex">
+						<input type="text" name="" id="search_track_listing_input" placeholder="Song Title / Song ID" />
+						<button type="button" id="clear_search__track_listing">清空</button>
+					</div>
+					<div style="border: 2px rgb(206, 37, 37) solid">
+						<div class="result_container" id="song_result_container"></div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<script src="/src/scripts/little_tools.js"></script>
+		<script src="/src/scripts/search_artist.js"></script>
+		<script src="/src/scripts/edit_tracklisting.js"></script>
+	</body>
+</html>

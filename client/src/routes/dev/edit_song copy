@@ -1,0 +1,217 @@
+import {MetaProvider, Title} from "@solidjs/meta";
+import {useParams} from "@solidjs/router";
+import {createResource, Switch, Match, For, createEffect, createSignal, onMount} from "solid-js";
+import {createStore} from "solid-js/store";
+import * as R from "ramda";
+import EditSongArtist from "./edit_song_artist";
+import {fetchSongByID, fetchArtistByID} from "./fetch_data_functions";
+let credit_count = 0;
+
+const [song_artist, setSongArtist] = createStore([]);
+const [credits, setCredits] = createStore([]);
+const [song_artist_test, setSongArtistTest] = createSignal();
+// const [credit_data, {refetch}] = createResource(song_artist_test, fetchArtist);
+
+// 添加和移除credit输入
+const addCreditInput = () => {
+	setCredits([
+		...credits,
+		{
+			count: credit_count++,
+			credit_artist_id: "",
+			credit_role: ""
+		}
+	]);
+};
+function removeCreditInput(count) {
+	setCredits(credits.filter((credit) => credit.count !== count));
+}
+
+// 在credit输入改变时更新数据
+const handleArtistIdInput = (el, index) => {
+	el.addEventListener("change", async (e) => {
+		if (el.value !== "" && !isNaN(el.value)) {
+			const artistId = e.currentTarget.value;
+			const res = await fetch(`http://127.0.0.1:3007/api/search/artist/?id=${artistId}`);
+			const [artist_data] = await res.json();
+			const artist_name_container = el.nextElementSibling;
+			artist_name_container.textContent = artist_data ? artist_data.name : "Artist Not Found";
+			setCredits(index(), {credit_artist_id: el.value, credit_artist_name: artist_data.name});
+		} else {
+			setCredits(index(), {credit_artist_id: "", credit_artist_name: ""});
+		}
+	});
+};
+
+// 移除数据中不需要的键值对
+function creditProcessor(input) {
+	const input_copy = R.clone(input);
+	const prpcessed_credits = R.forEach((obj) => {
+		delete obj.count;
+		delete obj.credit_artist_name;
+	}, input_copy);
+	return prpcessed_credits;
+}
+
+const DevEditSong = function () {
+	// const [song_data] = createResource(fetchSongByID);
+	let song_artist_count = 0;
+	// onMount(() => {
+	// 	if (fetch_data_count < 1 && song_data()) {
+	// 		R.forEach(async (obj) => {
+	// 			let [credit_artist_data] = await fetchArtist(obj.credit_artist_id);
+	// 			if (credit_artist_data) {
+	// 				setCredits([
+	// 					...credits,
+	// 					{count: credit_count++, credit_artist_id: obj.credit_artist_id, credit_artist_name: credit_artist_data.name, credit_role: obj.credit_role}
+	// 				]);
+	// 			}
+	// 		}, song_data()[0].credits);
+	// 		const song_artist_arr = song_data()[0].artist;
+
+	// 		R.forEach(
+	// 			async (item) => {
+	// 				let [song_artist_data] = await fetchArtist(item);
+	// 				if (song_artist_data) {
+	// 					setSongArtist([...song_artist, {count: song_artist_count++, song_artist_id: item, song_artist_name: song_artist_data.name}]);
+	// 				}
+	// 			},
+	// 			[song_artist_arr]
+	// 		);
+	// 		console.log(song_artist);
+	// 		fetch_data_count++;
+	// 	}
+	// });
+	const EditCredits = () => {
+		return (
+			<>
+				<div>
+					<table>
+						<tbody>
+							<tr>
+								<td>艺术家</td>
+								<td>化名</td>
+								<td>角色</td>
+							</tr>
+
+							<For each={credits}>
+								{(credit, index) => (
+									<>
+										{/* CSS TODO */}
+
+										<tr>
+											<td>
+												<input
+													type="text"
+													// name="credit_artist_id"
+													value={credit.credit_artist_id}
+													// onInput={(e) => {
+													// 	return setCredits(i(), {credit_artist_id: e.currentTarget.value, credit_artist_name: fetchArtist(e.currentTarget.value)});
+													// }}
+													use:handleArtistIdInput={index()}
+													hidden
+												/>
+												<input disabled value={credit.credit_artist_name} />
+											</td>
+											<td>
+												<input
+													type="text"
+													// name="credit_artist_id"
+													value={credit.override_credit_name ? credit.override_credit_name : ""}
+													onInput={(e) => setCredits(index(), "override_credit_name", e.currentTarget.value)}
+													size="5"
+												/>
+											</td>
+
+											<td>
+												<input
+													type="text"
+													// name="credit_role"
+													value={credit.credit_role}
+													onInput={(e) => setCredits(index(), "credit_role", e.currentTarget.value)}
+													size="15"
+													required
+												/>
+											</td>
+											<td>
+												<button onClick={() => removeCreditInput(credit.count)}>移除艺术家</button>
+											</td>
+										</tr>
+									</>
+								)}
+							</For>
+						</tbody>
+					</table>
+				</div>
+				<button type="button" onClick={addCreditInput}>
+					+
+				</button>
+				<div>
+					<div>网页背后的数据</div>
+					<textarea name="credit" id="" cols="30" rows="10" value={JSON.stringify(credits)} disabled />
+				</div>
+				<div>
+					<div>会发送到服务器的数据</div>
+					<textarea name="credit" id="" cols="30" rows="10" value={JSON.stringify(creditProcessor(credits))} />
+				</div>
+			</>
+		);
+	};
+
+	return (
+		<>
+			<MetaProvider>
+				<Title>Dev Edit Song</Title>
+			</MetaProvider>
+			<Switch>
+				<Match when={song_data.loading}>
+					<div>少女祈祷中……</div>
+				</Match>
+				<Match when={song_data() == 0 && useParams().id}>
+					<div>Song Not Found</div>
+					<a href="/dev/edit/release">前去新增曲目</a>
+				</Match>
+				<Match when={song_data() !== 0}>
+					{/* <div>Credit data: {JSON.stringify(credit_data())}</div> */}
+					{/* <input onChange={(e) => setSongArtistTest(e.currentTarget.value)}></input> */}
+					<form action="http://127.0.0.1:3007/dev/edit/song" method="post" target="_blank">
+						<h2>编辑曲目</h2>
+						<input type="hidden" name="id" value={song_data()[0]?.id} />
+						<div>
+							<h4>标题</h4>
+							<input type="text" name="title" value={song_data()[0]?.title} required />
+						</div>
+						<div>
+							<EditSongArtist />
+						</div>
+						<div>
+							<h4>时长</h4>
+							<input type="time" step="1" name="duration" value={song_data()[0]?.duration} />
+						</div>
+						<div>
+							<h4>制作人员名单</h4>
+							{/* CSS TODO */}
+							<div style={{display: "flex"}}>{/* <EditCredits /> */}</div>
+						</div>
+						<div>
+							<h4>歌词</h4>
+							<textarea name="lyrics" id="" cols="30" rows="10" />
+						</div>
+						<div>
+							<h4>ncm id</h4>
+							<input type="number" name="ncm_id" value={song_data()[0]?.ncm_id} />
+						</div>
+						<button type="submit">提交</button>
+					</form>
+					<div style={{width: "100%", height: "200px"}} />
+				</Match>
+				<Match when={song_data.error}>
+					<div>好像出现了异变……</div>
+					<div>{JSON.stringify(song_data.error)}</div>
+				</Match>
+			</Switch>
+		</>
+	);
+};
+
+export default DevEditSong;

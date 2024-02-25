@@ -3,7 +3,6 @@ const router = express.Router();
 const app = express();
 app.use(express.urlencoded({ extended: false }));
 
-// const get_album_page_data = require("../../functions/get_album_page_data");
 const mysql = require("mysql2/promise");
 const pool = mysql.createPool({
 	host: "localhost",
@@ -12,18 +11,18 @@ const pool = mysql.createPool({
 	database: "touhoudbtest",
 	waitForConnections: true,
 	connectionLimit: 10,
-	queueLimit: 0,
 });
 
-router.get("/list/albums", async function (req, res) {
+router.get("/list/songs", async function (req, res) {
 	try {
-		const [album_result, _] = await pool.query(
-			"SELECT * FROM touhoudbtest.albums"
-		);
-		res.send(album_result);
+		const connection = await pool.getConnection();
+		let getAllSongs = "SELECT * FROM touhoudbtest.song WHERE is_deleted = 0";
+		const [songList] = await connection.query(getAllSongs);
+		connection.release();
+		res.render("list_songs", { songList });
 	} catch (error) {
 		console.error(error);
-		res.status(404).send("Album not found");
+		res.status(500).send("An error occurred while processing the request");
 	}
 });
 

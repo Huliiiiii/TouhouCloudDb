@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="../style.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>查看专辑 - Touhou Cloud DB</title>
+	</head>
+
+	<body>
+		<div class="header">
+			<a href="../index.html">return to index html</a>
+		</div>
+		<div class="content">
+			<h1>SongList</h1>
+			<table>
+				<tr class="tableHeader">
+					<td>Title</td>
+					<td>Artist</td>
+				</tr>
+
+				<%for (let i=0; i<songList.length; i++) {%>
+				<tr>
+					<td>
+						<a href="<%='../song' + songList[i].id %>">
+							<%= songList[i].title %>
+							<span class="ID"> <%= "\[" + "Song" + songList[i].id + "\]" %> </span>
+						</a>
+					</td>
+					<td>
+						<%= songList[i].artist != null ? songList[i].artist : "N/A" %>
+					</td>
+				</tr>
+				<%}%>
+			</table>
+		</div>
+	</body>
+</html>

@@ -5,9 +5,7 @@ import {lazy, ErrorBoundary} from "solid-js";
 import "./index.css";
 
 function lazyImport(file_path) {
-	return lazy(function () {
-		return import(/* @vite-ignore */ file_path);
-	});
+	return lazy(() => import(/* @vite-ignore */ file_path));
 }
 const routes = [
 	{
@@ -73,13 +71,18 @@ function App() {
 		<>
 			<ErrorBoundary fallback={(err) => err}>
 				<div style={{height: "10%"}}>
-					<button href="#" onClick={() => history.back()}>
+					<button
+						href="/"
+						onClick={() => {
+							window.location = "/";
+						}}
+					>
 						return
 					</button>
 				</div>
 				<Router>
 					<Route>{routes}</Route>
-					<Route path="*" component={() => <div>404</div>} />
+					<Route path="*" component={() => <div>404 Not Found</div>} />
 				</Router>
 			</ErrorBoundary>
 		</>

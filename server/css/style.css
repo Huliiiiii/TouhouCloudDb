@@ -1,0 +1,14 @@
+body {
+	justify-content: center;
+}
+
+/* ID */
+.ID {
+	color: grey;
+	font-size: smaller;
+}
+
+.result_container {
+	justify-content: center;
+	width: 100%;
+}
