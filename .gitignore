@@ -1,2 +1,4 @@
-.git.bak
 node_modules
+pnpm-lock.yaml
+client/pnpm-lock.yaml
+server/pnpm-lock.yaml
