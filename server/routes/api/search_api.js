@@ -15,23 +15,27 @@ function columnProcessor(column) {
 	return if_A_Return_B_else_C(column !== "*" && column !== "" && column !== undefined, escapeId(column_arr), "*");
 }
 // TODO: Status Code
+// 重构
 // 艺术家
 router.get("/api/search/artist", async (req, res) => {
 	try {
+		// prettier-ingore
 		let column = "*";
 		if (req.query.keyword) {
 			let name = `%${req.query.keyword}%`;
-			let query_statement = `SELECT ${column} FROM artist WHERE name LIKE ? OR LOWER(name_variant ->> "$") LIKE LOWER(?) AND is_deleted = 0`;
+			let query_statement = `SELECT ${column} FROM artist WHERE name LIKE ? OR LOWER(name_variant ->> "$") LIKE LOWER(?) `;
 			let query_value = [name, req.query.keyword];
 			if (!isNaN(req.query.keyword)) {
-				query_statement = `SELECT ${column} FROM artist WHERE name LIKE ? OR LOWER(name_variant ->> "$") LIKE LOWER(?) OR id = ? AND is_deleted = 0`;
+				query_statement += `OR id = ? `;
 				query_value.push(req.query.keyword);
 			}
-			const [result] = await pool.query(query_statement, query_value);
+			query_statement += `AND is_deleted = 0`;
+			const [result] = await pool.execute(query_statement, query_value);
+			// console.log(pool.format(query_statement, query_value));
 			res.send(result);
 		} else if (req.query.id && !isNaN(parseFloat(req.query.id))) {
 			let id_array = req.query.id
-				.split(/[,，]/)
+				.split(/[,]/)
 				.map((item) => parseInt(item.trim(), 10))
 				.filter((value) => !isNaN(value));
 			let query_statement = `SELECT ${column} FROM touhoudbtest.artist WHERE id = ${id_array} AND is_deleted = 0 `;

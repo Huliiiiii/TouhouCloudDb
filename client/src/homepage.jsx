@@ -1,8 +1,12 @@
-import "/src/App.css";
+// import "/src/App.css";
+import { MetaProvider, Title } from "@solidjs/meta";
 
 function HomePage() {
 	return (
 		<>
+			<MetaProvider>
+				<Title>车万云数据库</Title>
+			</MetaProvider>
 			<div>
 				<h1>车万云数据库</h1>
 				<p>咕咕咕咕咕，咕咕咕咕咕</p>

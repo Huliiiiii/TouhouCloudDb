@@ -16,6 +16,10 @@ const DevEditSong = function () {
 				<Match when={song_data.loading}>
 					<div>少女祈祷中……</div>
 				</Match>
+				<Match when={song_data.error}>
+					<div>好像出现了异变……</div>
+					<div>{JSON.stringify(song_data.error)}</div>
+				</Match>
 				<Match when={song_data() == 0 && useParams().id}>
 					<div>Song Not Found</div>
 					<a href="/dev/edit/release">前去新增曲目</a>
@@ -53,10 +57,6 @@ const DevEditSong = function () {
 						<button type="submit">提交</button>
 					</form>
 					<div style={{width: "100%", height: "200px"}} />
-				</Match>
-				<Match when={song_data.error}>
-					<div>好像出现了异变……</div>
-					<div>{JSON.stringify(song_data.error)}</div>
 				</Match>
 			</Switch>
 		</>
