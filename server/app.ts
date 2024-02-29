@@ -1,11 +1,11 @@
-import config from "./config/config.json";
+import config from "./config/config.js";
 import createError from "http-errors";
 import express from "express";
 import cookieParser from "cookie-parser";
 const app = express();
 
 //DataBase Models
-import sequelize from "./database/query";
+// import sequelize from "./database/query";
 //TODO: Not use this in production environment
 require("./database/sync"); // Sync database before run
 

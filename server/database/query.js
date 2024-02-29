@@ -1,9 +1,9 @@
-const config = require("../config/config.json");
-const {Sequelize} = require('sequelize');
+const config = require("../config/config.js");
+const Sequelize = require("sequelize");
 
 const sequelize = new Sequelize(config.database.database_name, config.database.username, config.database.password, {
-    host: config.database.host,
-    dialect: "mysql"
+	host: config.database.host,
+	dialect: "mysql",
 });
 
 // (async function () {
