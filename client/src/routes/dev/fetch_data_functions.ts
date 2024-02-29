@@ -1,12 +1,12 @@
-// 尽量弃用
-async function fetchSongByID(id: string) {
+// createResoure的fetcher函数只能接受一个响应式的参数，这些函数用于这些用途
+async function fetchSongByID(id: string | string[]) {
 	if (!id) return null;
 	const res = await fetch(`http://127.0.0.1:3007/api/search/song?id=${id}`);
 	if (res.ok) return res.json();
 	return null;
 }
 
-async function fetchArtistByID(id: string) {
+async function fetchArtistByID(id: string | string[]) {
 	if (!id) return null;
 	if (Array.isArray(id)) id = id.join(",");
 	const res = await fetch(`http://127.0.0.1:3007/api/search/artist?id=${id}`);
