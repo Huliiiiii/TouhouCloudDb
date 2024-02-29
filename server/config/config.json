@@ -1,0 +1,11 @@
+{
+  "database": {
+    "host": "localhost",
+    "username": "root",
+    "password": "zjy06282109",
+    "database_name": "touhoudbtest"
+  },
+  "server": {
+    "port": 3007
+  }
+}
