@@ -10,12 +10,15 @@
 		"morgan": "^1.10.0",
 		"mysql2": "^3.9.2",
 		"ramda": "^0.29.1",
+		"sequelize": "^6.37.1",
 		"tslib": "^2.6.2"
 	},
 	"name": "touhouclouddb",
 	"version": "1.0.0",
 	"main": "app.js",
-	"scripts": {},
+	"scripts": {
+		"sequelize-automate": "sequelize-automate"
+	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
@@ -33,6 +36,8 @@
 		"nodemon": "^3.1.0",
 		"prettier": "3.2.4",
 		"prettier-plugin-ejs": "^1.0.3",
+		"sequelize-automate": "^1.2.2",
+		"sequelize-cli": "^6.6.2",
 		"ts-node": "^10.9.2"
 	}
 }

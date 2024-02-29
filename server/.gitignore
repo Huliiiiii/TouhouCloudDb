@@ -1,7 +1,12 @@
-node_modules/
-.vscode/
 # prettier
 .prettierignore
 .prettierrc
 
 test.*
+
+# Editor directories and files
+.idea
+.vscode
+
+# node packages
+node_modules
