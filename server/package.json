@@ -17,7 +17,8 @@
 	"version": "1.0.0",
 	"main": "app.js",
 	"scripts": {
-		"sequelize-automate": "sequelize-automate"
+		"sequelize-automate": "sequelize-automate",
+		"commit": "cz"
 	},
 	"keywords": [],
 	"author": "",
@@ -39,5 +40,10 @@
 		"sequelize-automate": "^1.2.2",
 		"sequelize-cli": "^6.6.2",
 		"ts-node": "^10.9.2"
+	},
+	"config": {
+		"commitizen": {
+			"path": "./node_modules/cz-conventional-changelog"
+		}
 	}
 }
