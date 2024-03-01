@@ -1,7 +1,6 @@
-const {
-    DataTypes
-} = require('sequelize');
-const sequelize = require("../query");
+import {DataTypes} from "sequelize";
+import sequelize from "../query";
+
 const Song = sequelize.define('song', {
     id: {
         type: DataTypes.INTEGER,
@@ -14,38 +13,38 @@ const Song = sequelize.define('song', {
     title: {
         type: DataTypes.STRING(45),
         allowNull: false,
-        comment: null,
+        comment: "",
         field: "title"
     },
     artist: {
         type: DataTypes.JSON,
-        comment: null,
+        comment: "",
         field: "artist"
     },
     credits: {
         type: DataTypes.JSON,
-        comment: null,
+        comment: "",
         field: "credits"
     },
     duration: {
         type: DataTypes.TIME,
-        comment: null,
+        comment: "",
         field: "duration"
     },
     lyrics: {
         type: DataTypes.JSON,
-        comment: null,
+        comment: "",
         field: "lyrics"
     },
     is_deleted: {
         type: DataTypes.TINYINT,
         allowNull: false,
         defaultValue: "0",
-        comment: null,
+        comment: "",
         field: "is_deleted"
     }
 }, {
     freezeTableName: true, timestamps: true, updatedAt: "update_time", createdAt: "create_time"
 });
 
-module.exports = Song;
+export default Song;

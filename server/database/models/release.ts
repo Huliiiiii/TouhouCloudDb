@@ -1,7 +1,6 @@
-const {
-    DataTypes
-} = require('sequelize');
-const sequelize = require("../query");
+import {DataTypes} from "sequelize";
+import sequelize from "../query";
+
 const Release = sequelize.define('release', {
         id: {
             type: DataTypes.INTEGER,
@@ -49,22 +48,22 @@ const Release = sequelize.define('release', {
         },
         catalog_num: {
             type: DataTypes.STRING(45),
-            comment: null,
+            comment: "",
             field: "catalog_num"
         },
         track_listing: {
             type: DataTypes.JSON,
-            comment: null,
+            comment: "",
             field: "track_listing"
         },
         classfier: {
             type: DataTypes.JSON,
-            comment: null,
+            comment: "",
             field: "classfier"
         },
         ncm_id: {
             type: DataTypes.STRING(45),
-            comment: null,
+            comment: "",
             field: "ncm_id"
         },
 
@@ -72,7 +71,7 @@ const Release = sequelize.define('release', {
             type: DataTypes.TINYINT,
             allowNull: false,
             defaultValue: "0",
-            comment: null,
+            comment: "",
             field: "is_deleted"
         }
     },
@@ -80,4 +79,4 @@ const Release = sequelize.define('release', {
         freezeTableName: true, timestamps: true, updatedAt: "update_time", createdAt: "create_time"
     });
 
-module.exports = Release;
+export default Release;

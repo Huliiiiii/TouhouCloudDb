@@ -3,10 +3,12 @@ import {MetaProvider, Title} from "@solidjs/meta";
 import moment from "moment";
 
 import "/src/App.css";
+
 const get_album_info = async () => {
-	const response = await fetch("http://127.0.0.1:3001/list/albums");
+	const response = await fetch("http://127.0.0.1:3007/list/albums");
 	return response.json();
 };
+
 function AlbumList() {
 	const [data] = createResource(get_album_info);
 	return (

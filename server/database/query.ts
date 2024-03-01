@@ -1,9 +1,9 @@
-const config = require("../config/config.js");
-const Sequelize = require("sequelize");
+import config from "../config/config";
+import {Sequelize} from "sequelize";
 
 const sequelize = new Sequelize(config.database.database_name, config.database.username, config.database.password, {
-	host: config.database.host,
-	dialect: "mysql",
+    host: config.database.host,
+    dialect: "mysql",
 });
 
 // (async function () {
@@ -14,5 +14,4 @@ const sequelize = new Sequelize(config.database.database_name, config.database.u
 //         console.error("fail", error);
 //     }
 // })();
-
-module.exports = sequelize;
+export default sequelize;

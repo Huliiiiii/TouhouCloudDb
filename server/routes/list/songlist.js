@@ -28,7 +28,7 @@ app.use(express.urlencoded({extended: false}));
 // 	}
 // });
 
-router.get("/list/songs", async function (req, res) {
+router.get("/old/list/songs", async function (req, res) {
     try {
         await sequelize.authenticate();
         const songList = await Song.findAll({
