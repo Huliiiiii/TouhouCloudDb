@@ -10,3 +10,9 @@ test.*
 
 # node packages
 node_modules
+
+# env
+.env.local
+
+# server log
+logs
