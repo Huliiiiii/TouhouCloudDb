@@ -45,7 +45,7 @@ app.use(express.urlencoded({extended: false}));
 //     }
 // });
 
-router.get("/list/albums", async function (req, res) {
+router.get("/old/list/albums", async function (req, res) {
     try {
         await sequelize.authenticate();
         const release_data = await Release.findAll();

@@ -10,6 +10,7 @@ namespace config {
 	}
 	let database: database;
 	let server: server;
+	let log_dir:string;
 }
 
 export default config;

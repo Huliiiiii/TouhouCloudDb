@@ -1,13 +1,21 @@
+require("dotenv").config();
+const path = require('path');
 const config = {
-	database: {
-		host: "localhost",
-		username: "root",
-		password: "KitsuneMySQLPw2333==",
-		database_name: "touhoudbtest",
-	},
-	server: {
-		port: 3007,
-	},
+    development: {
+        database: {
+            host: "localhost",
+            username: "root",
+            password: "zjy06282109",
+            database_name: "touhoudbtest",
+        },
+        server: {
+            port: 3007,
+        },
+        log_dir: path.join(__dirname, "..", "logs"),
+    },
+    test: {},
+    production: {}
 };
 
-module.exports = config;
+module.exports = config[process.env.NODE_ENV || "development"];
+

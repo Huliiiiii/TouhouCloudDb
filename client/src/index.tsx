@@ -55,10 +55,10 @@ const routes = [
 				path: "/list/song",
 				component: lazy(() => import("/src/routes/dev/list_song"))
 			},
-			{
-				path: "/test",
-				component: lazy(() => import("/src/routes/dev/test"))
-			}
+			// {
+			// 	path: "/test",
+			// 	component: lazy(() => import("/src/routes/dev/test"))
+			// }
 		]
 	}
 ];

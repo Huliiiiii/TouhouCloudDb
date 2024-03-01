@@ -1,5 +1,5 @@
-const {DataTypes} = require('sequelize');
-const sequelize = require("../query");
+import {DataTypes} from "sequelize";
+import sequelize from "../query";
 
 const Artist = sequelize.define('artist', {
     id: {
@@ -55,4 +55,4 @@ const Artist = sequelize.define('artist', {
     freezeTableName: true, timestamps: true, updatedAt: "update_time", createdAt: "create_time"
 });
 
-module.exports = Artist;
+export default Artist;

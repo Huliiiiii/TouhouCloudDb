@@ -2,11 +2,13 @@
 	"dependencies": {
 		"cookie-parser": "^1.4.6",
 		"cors": "^2.8.5",
+		"dotenv": "^16.4.5",
 		"ejs": "^3.1.9",
 		"express": "^4.18.2",
 		"express-rate-limit": "^7.1.5",
 		"http-errors": "^2.0.0",
 		"joi": "^17.12.2",
+		"log4js": "^6.9.1",
 		"morgan": "^1.10.0",
 		"mysql2": "^3.9.2",
 		"ramda": "^0.29.1",
@@ -15,10 +17,13 @@
 	},
 	"name": "touhouclouddb",
 	"version": "1.0.0",
-	"main": "app.js",
+	"main": "app.ts",
 	"scripts": {
 		"sequelize-automate": "sequelize-automate",
 		"commit": "cz"
+	},
+	"apidoc": {
+		"version": "1.0.0"
 	},
 	"keywords": [],
 	"author": "",
@@ -32,6 +37,7 @@
 		"@types/http-errors": "^2.0.4",
 		"@types/morgan": "^1.9.9",
 		"@types/node": "^20.11.22",
+		"apidoc": "^1.2.0",
 		"eslint": "^8.57.0",
 		"eslint-config-prettier": "^9.1.0",
 		"nodemon": "^3.1.0",
