@@ -5,7 +5,7 @@ import ReleaseModel from "../database/models/release";
 import SongModel from "../database/models/song";
 import logger from "../utils/logger";
 
-export const API = async function (req: Request, res: Response) {
+export const API = async function (req: Request, res: Response): Promise<null | void> {
 	try {
 		if (!req.query.type) return null;
 		const type = typeof req.query.type !== "string" ? req.query.type.toString() : req.query.type;
@@ -15,21 +15,40 @@ export const API = async function (req: Request, res: Response) {
 		// TODO:Handle error
 	}
 };
-
+// TODO: No Anyscript
 const isNumber = function (str: any) {
 	// 0-9, 英文逗号，空格
 	const regex = /^[0-9,\s]+$/;
 	return regex.test(str);
 };
 
-const reqHandler = function (req: Request, res: Response) {
-	if ((!req.query.id && !req.query.keyword) || (req.query.id && req.query.keyword) || (req.query.id && !isNumber(req.query.id))) {
-		res.status(400).end();
-		return false;
-	} else return true;
+const DataFetcher = async function (req: Request, res: Response, type: string): Promise<null | void> {
+	// prettier-ignore
+	if ((!req.query.id && !req.query.keyword) ||
+		(req.query.id && req.query.keyword) ||
+		(req.query.id && !isNumber(req.query.id))) {
+			res.status(400).end();
+	}
+	let model;
+	switch (type) {
+		case "song":
+			model = SongModel;
+			break;
+		case "artist":
+			model = ArtistModel;
+			break;
+		case "release":
+			model = ReleaseModel;
+			break;
+		default:
+			return null;
+	}
+	if (req.query.id) {
+		UseID(req, res, model);
+	} else if (req.query.keyword) {
+		UseKW(req, res, model);
+	}
 };
-
-// prettier-ignore
 
 // TODO: 将sequelize.define改为更新并适配ts的extends Model方法
 // 见：https://sequelize.org/master/manual/model-basics.html
@@ -89,27 +108,4 @@ const UseKW = async function (req: Request, res: Response, model: ModelCtor<Mode
 		result = await model.findAll(query);
 	}
 	res.send(result);
-};
-
-const DataFetcher = async function (req: Request, res: Response, type: string) {
-	if (reqHandler(req, res) === false) return null;
-	let model;
-	switch (type) {
-		case "song":
-			model = SongModel;
-			break;
-		case "artist":
-			model = ArtistModel;
-			break;
-		case "release":
-			model = ReleaseModel;
-			break;
-		default:
-			return null;
-	}
-	if (req.query.id) {
-		UseID(req, res, model);
-	} else if (req.query.keyword) {
-		UseKW(req, res, model);
-	}
 };
