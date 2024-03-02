@@ -35,5 +35,5 @@ router.get("/list/albums", listController.listAlbums);
  */
 router.get("/list/songs", listController.listSongs);
 
-router.get("/api", apiController.API);
+router.get("/api", apiController.GET);
 export default router;

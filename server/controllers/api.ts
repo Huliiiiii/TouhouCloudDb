@@ -5,7 +5,9 @@ import ReleaseModel from "../database/models/release";
 import SongModel from "../database/models/song";
 import logger from "../utils/logger";
 
-export const API = async function (req: Request, res: Response): Promise<null | void> {
+export { GET };
+
+async function GET(req: Request, res: Response): Promise<null | void> {
 	try {
 		if (!req.query.type) return null;
 		const type = typeof req.query.type !== "string" ? req.query.type.toString() : req.query.type;
@@ -14,7 +16,7 @@ export const API = async function (req: Request, res: Response): Promise<null | 
 		logger.error(error);
 		// TODO:Handle error
 	}
-};
+}
 // TODO: No Anyscript
 const isNumber = function (str: any) {
 	// 0-9, 英文逗号，空格
@@ -75,9 +77,18 @@ const UseKW = async function (req: Request, res: Response, model: ModelCtor<Mode
 	switch (model) {
 		case ArtistModel:
 			Object.assign(query.where, {
-				name: {
-					[Op.substring]: kw,
-				},
+				[Op.or]: [
+					{
+						name: {
+							[Op.substring]: kw,
+						},
+					},
+					{
+						name_variant: {
+							[Op.substring]: kw,
+						},
+					},
+				],
 			});
 			break;
 		case ReleaseModel:
