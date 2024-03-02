@@ -1,18 +1,14 @@
-import config from "./config/config.js";
-import createError from "http-errors";
-import express from "express";
 import cookieParser from "cookie-parser";
-import logger from "./utils/logger"
-
-import webRouter from "./web_router"
-
+import express from "express";
+import fs from "fs";
+import createError from "http-errors";
+import path from "path";
+import config from "./config/config.js";
+import logger from "./utils/logger";
+import webRouter from "./web_router";
 const app = express();
 
 import syncDatabase from "./database/sync";
-
-//
-import fs from "fs";
-import path from "path";
 
 // 跨域请求
 import cors from "cors";
@@ -30,7 +26,7 @@ app.set("view engine", "ejs");
 app.set("views", "./views");
 //
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // 静态资源
@@ -38,7 +34,7 @@ app.use(express.static("./css"));
 app.use("/src", express.static("./src"));
 //
 
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 
 // 限流
 // const { rateLimit } = require("express-rate-limit");
@@ -51,40 +47,36 @@ app.use(express.urlencoded({extended: false}));
 // });
 // app.use(limiter);
 
-// index page
-app.use(require("./index.js"));
-
 // 路由
-const routes_path = "./routes";
+const routes_path = "./routes/api";
 const loadRoutes = (dir: string) => {
-    const files = fs.readdirSync(dir);
-    files.forEach((file) => {
-        const filePath = path.join(dir, file);
-        if (fs.statSync(filePath).isDirectory()) {
-            loadRoutes(filePath);
-        } else {
-            app.use("/", require(path.resolve(filePath)));
-        }
-    });
+	const files = fs.readdirSync(dir);
+	files.forEach((file) => {
+		const filePath = path.join(dir, file);
+		if (fs.statSync(filePath).isDirectory()) {
+			loadRoutes(filePath);
+		} else {
+			app.use("/", require(path.resolve(filePath)));
+		}
+	});
 };
 loadRoutes(routes_path);
 app.use("/", webRouter);
 
 app.use(function (req, res, next) {
-    next(createError(404));
+	next(createError(404));
 });
 
 // Something only appears in dev or test
 if (process.env.NODE_ENV != "production") {
-    // Sync database models
-    // Sync database before run
-    syncDatabase().then(() => {
-        app.listen(config.server.port, () => logger.info(`Server runing at http://127.0.0.1:${config.server.port}/`));
-    });
+	// Sync database models
+	// Sync database before run
+	syncDatabase().then(() => {
+		app.listen(config.server.port, () => logger.info(`Server runing at http://127.0.0.1:${config.server.port}/`));
+	});
 } else {
-    app.listen(config.server.port, () => logger.info(`Server runing at http://127.0.0.1:${config.server.port}/`));
+	app.listen(config.server.port, () => logger.info(`Server runing at http://127.0.0.1:${config.server.port}/`));
 }
-
 
 // error handler
 // Ctrl + C的代码还没搞明白怎么用
