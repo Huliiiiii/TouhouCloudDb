@@ -47,37 +47,33 @@ const UseID = async function (req: Request, res: Response, model: ModelCtor<Mode
 const UseKW = async function (req: Request, res: Response, model: ModelCtor<Model>) {
 	const kw = req.query.keyword;
 	let result;
-	let query;
+	// TODO: 想一个比query更好的变量名
+	let query = {
+		where: {
+			is_deleted: "0",
+		},
+	};
 	switch (model) {
 		case ArtistModel:
-			query = {
-				where: {
-					name: {
-						[Op.substring]: kw,
-					},
-					is_deleted: "0",
+			Object.assign(query.where, {
+				name: {
+					[Op.substring]: kw,
 				},
-			};
+			});
 			break;
 		case ReleaseModel:
-			query = {
-				where: {
-					title: {
-						[Op.substring]: kw,
-					},
-					is_deleted: "0",
+			Object.assign(query.where, {
+				title: {
+					[Op.substring]: kw,
 				},
-			};
+			});
 			break;
 		case SongModel:
-			query = {
-				where: {
-					name: {
-						[Op.substring]: kw,
-					},
-					is_deleted: "0",
+			Object.assign(query.where, {
+				title: {
+					[Op.substring]: kw,
 				},
-			};
+			});
 			break;
 		default:
 			break;
