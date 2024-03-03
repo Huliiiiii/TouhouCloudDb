@@ -1,11 +1,13 @@
 import cookieParser from "cookie-parser";
 import express from "express";
 import fs from "fs";
-import createError from "http-errors";
+// import createError from "http-errors";
 import path from "path";
 import config from "./config/config.js";
 import logger from "./utils/logger";
 import webRouter from "./web_router";
+import * as dotenv from "dotenv";
+dotenv.config();
 const app = express();
 
 import syncDatabase from "./database/sync";
@@ -63,19 +65,19 @@ const loadRoutes = (dir: string) => {
 loadRoutes(routes_path);
 app.use("/", webRouter);
 
-app.use(function (req, res, next) {
-	next(createError(404));
-});
+// app.use(function (req, res, next) {
+// 	next(createError(404));
+// });
 
 // Something only appears in dev or test
 if (process.env.NODE_ENV != "production") {
 	// Sync database models
 	// Sync database before run
 	syncDatabase().then(() => {
-		app.listen(config.server.port, () => logger.info(`Server runing at http://127.0.0.1:${config.server.port}/`));
+		app.listen(config.server.port, () => logger.info(`Server running at http://127.0.0.0.1:${config.server.port}/`));
 	});
 } else {
-	app.listen(config.server.port, () => logger.info(`Server runing at http://127.0.0.1:${config.server.port}/`));
+	app.listen(config.server.port, () => logger.info(`Server running at http://127.0.0.1:${config.server.port}/`));
 }
 
 // error handler
