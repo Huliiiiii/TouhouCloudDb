@@ -8,12 +8,12 @@ const { if_A_Return_B_else_C } = require("../../src/scripts/little_tools.js");
  * @param {Array<String,Array<String>>} column
  * @returns {String}
  */
-function columnProcessor(column) {
-	// 接收到的是一个数组
-	let column_str = column.toString(column);
-	let column_arr = column_str.split(/,\s*/);
-	return if_A_Return_B_else_C(column !== "*" && column !== "" && column !== undefined, escapeId(column_arr), "*");
-}
+// function columnProcessor(column) {
+// 	// 接收到的是一个数组
+// 	let column_str = column.toString(column);
+// 	let column_arr = column_str.split(/,\s*/);
+// 	return if_A_Return_B_else_C(column !== "*" && column !== "" && column !== undefined, escapeId(column_arr), "*");
+// }
 // TODO: Status Code
 // 重构
 // 艺术家
