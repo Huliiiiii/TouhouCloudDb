@@ -1,29 +1,38 @@
 {
 	"compilerOptions": {
-		"strict": true,
-		"target": "ESNext",
-		"module": "ESNext",
-		"moduleResolution": "node",
+		"allowImportingTsExtensions": true,
 		"allowSyntheticDefaultImports": true,
 		"esModuleInterop": true,
+		"isolatedModules": true,
 		"jsx": "preserve",
 		"jsxImportSource": "solid-js",
-		"types": ["vite/client"],
+		"lib": ["ES2020", "DOM", "DOM.Iterable"],
+		"module": "ESNext",
+		"moduleResolution": "node",
 		"noEmit": true,
-		"isolatedModules": true,
+		"noFallthroughCasesInSwitch": true,
 		"noImplicitAny": true,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
 		"noImplicitReturns": true,
 		"noUncheckedIndexedAccess": true,
-		"useDefineForClassFields": true,
-		"lib": ["ES2020", "DOM", "DOM.Iterable"],
-		"skipLibCheck": true,
-		/* Bundler mode */
-		"allowImportingTsExtensions": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"paths": {
+			"compoments/*": ["./src/compoments/*"],
+			"routes/*": ["./src/routes/*"],
+			"src/*": ["./src/*"],
+			"types/*": ["./src/types/*"]
+		},
 		"resolveJsonModule": true,
-		"noFallthroughCasesInSwitch": true
+		"skipLibCheck": true,
+		"strict": true,
+		"target": "ESNext",
+		"types": ["vite/client"],
+		"useDefineForClassFields": true
 	},
 	"include": ["src"],
-	"references": [{ "path": "./tsconfig.node.json" }]
+	"references": [
+		{
+			"path": "./tsconfig.node.json"
+		}
+	]
 }
