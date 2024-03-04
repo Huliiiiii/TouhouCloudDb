@@ -22,7 +22,27 @@
 		/* Bundler mode */
 		"allowImportingTsExtensions": true,
 		"resolveJsonModule": true,
-		"noFallthroughCasesInSwitch": true
+		"noFallthroughCasesInSwitch": true,
+		// "preserveSymlinks": true,                         /* Disable resolving symlinks to their realpath. This correlates to the same flag in node. */
+		"forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
+		/* Type Checking */
+		"strictNullChecks": true /* When type checking, take into account 'null' and 'undefined'. */,
+		"strictFunctionTypes": true /* When assigning functions, check to ensure parameters and the return values are subtype-compatible. */,
+		"strictBindCallApply": true /* Check that the arguments for 'bind', 'call', and 'apply' methods match the original function. */,
+		"strictPropertyInitialization": true /* Check for class properties that are declared but not set in the constructor. */,
+		"noImplicitThis": true /* Enable error reporting when 'this' is given the type 'any'. */,
+		"useUnknownInCatchVariables": true /* Default catch clause variables as 'unknown' instead of 'any'. */,
+		"alwaysStrict": true /* Ensure 'use strict' is always emitted. */,
+		"exactOptionalPropertyTypes": true /* Interpret optional property types as written, rather than adding 'undefined'. */,
+		// "noUncheckedIndexedAccess": true,                 /* Add 'undefined' to a type when accessed using an index. */
+		"noImplicitOverride": true /* Ensure overriding members in derived classes are marked with an override modifier. */,
+		// "noPropertyAccessFromIndexSignature": true /* Enforces using indexed accessors for keys declared using an indexed type. */,
+		// "allowUnusedLabels": true,                        /* Disable error reporting for unused labels. */
+		// "allowUnreachableCode": true /* Disable error reporting for unreachable code. */,
+
+		/* Completeness */
+		// "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
+		"removeComments": true
 	},
 	"include": ["src"],
 	"references": [{ "path": "./tsconfig.node.json" }]

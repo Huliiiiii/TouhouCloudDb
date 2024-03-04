@@ -65,7 +65,7 @@ interface options extends FindOptions<any> {
 }
 
 // TODO: 想一个比query更好的变量名
-var options: options = {
+const options: options = {
 	attributes: { exclude: ["create_time", "update_time"] },
 	where: {
 		is_deleted: "0",
