@@ -1,4 +1,14 @@
 {
+	"apidoc": {
+		"version": "1.0.0"
+	},
+	"author": "",
+	"config": {
+		"commitizen": {
+			"path": "./node_modules/cz-conventional-changelog"
+		}
+	},
+	"description": "",
 	"dependencies": {
 		"cookie-parser": "^1.4.6",
 		"cors": "^2.8.5",
@@ -15,20 +25,6 @@
 		"sequelize": "^6.37.1",
 		"tslib": "^2.6.2"
 	},
-	"name": "touhouclouddb",
-	"version": "1.0.0",
-	"main": "app.ts",
-	"scripts": {
-		"sequelize-automate": "sequelize-automate",
-		"commit": "cz"
-	},
-	"apidoc": {
-		"version": "1.0.0"
-	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"description": "",
 	"devDependencies": {
 		"@types/cookie-parser": "^1.4.6",
 		"@types/cors": "^2.8.17",
@@ -47,9 +43,14 @@
 		"sequelize-cli": "^6.6.2",
 		"ts-node": "^10.9.2"
 	},
-	"config": {
-		"commitizen": {
-			"path": "./node_modules/cz-conventional-changelog"
-		}
-	}
+	"keywords": [],
+	"license": "ISC",
+	"main": "app.ts",
+	"name": "touhouclouddb",
+	"scripts": {
+		"commit": "cz",
+		"dev": "nodemon app.ts",
+		"sequelize-automate": "sequelize-automate"
+	},
+	"version": "1.0.0"
 }
