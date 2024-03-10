@@ -4,7 +4,6 @@ import ArtistModel from "../database/models/artist";
 import ReleaseModel from "../database/models/release";
 import SongModel from "../database/models/song";
 import logger from "../utils/logger";
-
 export { GET };
 
 async function GET(req: Request, res: Response): Promise<void> {
@@ -46,7 +45,8 @@ const DataFetcher = async function (req: Request, res: Response, type: string): 
 			model = ReleaseModel;
 			break;
 		default:
-			return null;
+			res.status(400).end();
+			return;
 	}
 	if (req.query.id) {
 		UseID(req, res, model);
@@ -56,72 +56,73 @@ const DataFetcher = async function (req: Request, res: Response, type: string): 
 };
 
 // 好像这样不是正确的写type方式
-interface options extends FindOptions<any> {
+interface option extends FindOptions<any> {
 	attributes: FindAttributeOptions;
 	where: {
-		is_deleted: "0" | "1";
-		[Op.or]: object[];
+		is_deleted?: "0" | "1";
+		id?: string | string[] | {};
+		[Op.or]?: object[];
+		name?: {};
+		name_variant?: {};
+		title?: {};
 	};
 }
 
-// TODO: 想一个比query更好的变量名
-var options: options = {
+const default_option: option = {
 	attributes: { exclude: ["create_time", "update_time"] },
 	where: {
 		is_deleted: "0",
-		[Op.or]: [],
 	},
 };
-const WHERE_OR = (...option: object[]) => {
-	options.where[Op.or]!.push(...option);
-};
+
 // TODO: 将sequelize.define改为更新并适配ts的extends Model方法
 // 见：https://sequelize.org/master/manual/model-basics.html
-const UseID = async function (req: Request, res: Response, model: ModelCtor<Model>) {
-	const id = req.query.id!.toString().split(",");
-	WHERE_OR({ id: id.length === 1 ? { [Op.eq]: id } : { [Op.in]: id } });
-	const result = await model.findAll(options);
+const UseID = async function (req: Request, res: Response, model: ModelCtor<Model<any, any>>) {
+	const id = req.query.id as string;
+	const id_arr = id.split(",");
+	const option = { ...default_option };
+	option.where = { ...option.where, id: id_arr.length === 1 ? id : { [Op.in]: id_arr } };
+	const result = await model.findAll(option);
 	res.send(result);
 };
 
-const UseKW = async function (req: Request, res: Response, model: ModelCtor<Model>) {
-	var kw = req.query.keyword;
-	let result: object;
-	if (isNaN(Number(kw)) === false) {
-		WHERE_OR({ id: { [Op.eq]: kw } });
+const UseKW = async function (req: Request, res: Response, model: ModelCtor<Model<any, any>>) {
+	const kw = req.query.keyword as string;
+	const option = { ...default_option };
+	if (!isNaN(Number(kw))) {
+		option.where = { ...option.where, id: kw };
 	}
 	switch (model) {
 		case ArtistModel:
-			WHERE_OR(
-				{
-					name: {
-						[Op.substring]: kw,
-					},
+			option.where = {
+				...option.where,
+				name: {
+					[Op.substring]: kw,
 				},
-				{
-					name_variant: {
-						[Op.substring]: kw,
-					},
+				name_variant: {
+					[Op.substring]: kw,
 				},
-			);
+			};
 			break;
 		case ReleaseModel:
-			WHERE_OR({
+			option.where = {
+				...option.where,
 				title: {
 					[Op.substring]: kw,
 				},
-			});
+			};
 			break;
 		case SongModel:
-			WHERE_OR({
+			option.where = {
+				...option.where,
 				title: {
 					[Op.substring]: kw,
 				},
-			});
+			};
 			break;
 		default:
 			break;
 	}
-	result = await model.findAll(options);
+	const result = await model.findAll(option);
 	res.send(result);
 };
