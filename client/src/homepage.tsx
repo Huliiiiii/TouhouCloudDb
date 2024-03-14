@@ -1,6 +1,8 @@
-// import "/src/App.css";
+// import "/src/app.css";
 import { MetaProvider, Title } from "@solidjs/meta";
-import { For } from "solid-js";
+import { useNavigate } from "@solidjs/router";
+import { RouteGuard } from "routes/RouteGuard";
+import { For, createEffect } from "solid-js";
 
 interface link {
 	url: string;
@@ -22,6 +24,8 @@ const links: link[] = [
 ];
 
 function HomePage() {
+	RouteGuard();
+
 	return (
 		<>
 			<MetaProvider>
