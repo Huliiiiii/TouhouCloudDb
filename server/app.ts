@@ -50,7 +50,7 @@ app.use(express.urlencoded({ extended: false }));
 // app.use(limiter);
 
 // 路由
-const routes_path = "./routes/api";
+const routes_path = "./routes";
 const loadRoutes = (dir: string) => {
 	const files = fs.readdirSync(dir);
 	files.forEach((file) => {

@@ -1,9 +1,13 @@
 import config from "../config/config";
-import {Sequelize} from "sequelize";
+import { Sequelize } from "sequelize";
 
-const sequelize = new Sequelize(config.database.database_name, config.database.username, config.database.password, {
-    host: config.database.host,
-    dialect: "mysql",
+// prettier-ignore
+const sequelize = new Sequelize(
+    config.database.database_name,
+    config.database.username,
+    config.database.password, {
+	host: config.database.host,
+	dialect: "mysql",
 });
 
 // (async function () {

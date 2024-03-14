@@ -1,6 +1,7 @@
 import express from "express";
 import * as listController from "./controllers/list";
 import * as apiController from "./controllers/api";
+import * as authController from "./controllers/auth";
 const router = express.Router();
 
 /**
@@ -35,5 +36,10 @@ router.get("/list/albums", listController.listAlbums);
  */
 router.get("/list/songs", listController.listSongs);
 
+router.post("/api/login", authController.login);
+router.post("/api/register", authController.register);
+router.post("/api/checkUsername", authController.checkUsername);
+
 router.get("/api", apiController.GET);
+
 export default router;
