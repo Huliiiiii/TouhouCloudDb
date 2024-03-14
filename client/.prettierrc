@@ -16,5 +16,8 @@
 	"vueIndentScriptAndStyle": false,
 	"endOfLine": "auto",
 	"rangeStart": 0,
-	"embeddedLanguageFormatting": "auto"
+	"embeddedLanguageFormatting": "auto",
+	"plugins": [
+		"prettier-plugin-tailwindcss"
+	]
 }
