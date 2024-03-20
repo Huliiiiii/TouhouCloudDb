@@ -2,12 +2,12 @@ import cookieParser from "cookie-parser";
 import express from "express";
 import fs from "fs";
 // import createError from "http-errors";
-import path from "path";
 import config from "config/config.js";
+import * as dotenv from "dotenv";
+import path from "path";
 import logger from "utils/logger.js";
 import webRouter from "./src/router/web_router";
-import * as dotenv from "dotenv";
-dotenv.config();
+dotenv.config({ path: [".env.local", ".env"] });
 const app = express();
 
 import syncDatabase from "database/sync";
@@ -69,16 +69,22 @@ app.use("/", webRouter);
 // app.use(function (req, res, next) {
 // 	next(createError(404));
 // });
+const url = process.env.SERVER_URL;
+const port = process.env.SERVER_PORT;
 
 // Something only appears in dev or test
 if (process.env.NODE_ENV != "production") {
 	// Sync database models
 	// Sync database before run
-	syncDatabase().then(() => {
-		app.listen(config.server.port, () => logger.info(`Server running at http://127.0.0.0.1:${config.server.port}/`));
+	void syncDatabase().then(() => {
+		app.listen(port, () => {
+			logger.info(`Server running at ${url}:${port}/`);
+		});
 	});
 } else {
-	app.listen(config.server.port, () => logger.info(`Server running at http://127.0.0.1:${config.server.port}/`));
+	app.listen(port, () => {
+		logger.info(`Server running at ${url}:${port}/`);
+	});
 }
 
 // error handler
