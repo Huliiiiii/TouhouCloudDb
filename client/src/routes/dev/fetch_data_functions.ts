@@ -1,37 +1,60 @@
 // createResoure的fetcher函数只能接受一个响应式的参数，这些函数用于这些用途
+const url = import.meta.env.VITE_SERVER_URL as string;
+
 async function fetchSongByID(id: string | string[]) {
-	if (!id) return null;
-	const res = await fetch(`http://127.0.0.1:3007/api/search/song?id=${id}`);
+	if (id == undefined) return;
+	if (Array.isArray(id)) id = id.join(",");
+	const res = await fetch(`${url}/api/search/song?id=${id}`);
 	if (res.ok) return res.json();
-	return null;
+	return;
 }
 
 async function fetchArtistByID(id: string | string[]) {
-	if (!id) return null;
+	if (id == undefined) return;
 	if (Array.isArray(id)) id = id.join(",");
-	const res = await fetch(`http://127.0.0.1:3007/api/search/artist?id=${id}`);
+	const res = await fetch(`${url}/api/search/artist?id=${id}`);
 	if (res.ok) return res.json();
-	return null;
+	return;
 }
 async function fetchArtistByKeyword(keyword: string) {
-	if (keyword === "" && keyword.length === 0) return null;
+	if (keyword === "" && keyword.length === 0) return;
 	if (Array.isArray(keyword)) keyword = keyword.join(",");
-	const res = await fetch(`http://127.0.0.1:3007/api/search/artist?keyword=${keyword}`);
+	const res = await fetch(`${url}/api/search/artist?keyword=${keyword}`);
 	if (res.ok) return res.json();
-	return null;
-}
-/**
- * Fetches data from the API based on the provided parameters.
- * @param {string} target_type - The type of data to fetch. Valid values: "song" or "artist"
- * @param {string} query_type - The type of query to perform. Valid values: "id" or "keyword".
- * @param {string} query_params - The parameters for the query.
- * @returns {Promise<Object|null>} - The data fetched from the API, or null if the response is not ok.
- */
-async function fetchData(target_type: string, query_type: string, query_params: string | number) {
-	const url = `http://127.0.0.1:3007/api/search`;
-	const res = await fetch(`${url}/${target_type}?${query_type}=${query_params}`);
-	if (res.ok) return res.json();
-	return null;
+	return;
 }
 
-export {fetchSongByID, fetchArtistByID, fetchArtistByKeyword, fetchData};
+/**
+ * Fetch data from server
+ * @param target_type target type, must be one of "artist", "release" or "song"
+ * @param query_type query type, must be one of "id" or "keyword"
+ * @param query_params query parameters, must be a string, an array of strings, or a Set of strings
+ * @returns a Promise of an array of objects
+ * @throws {Error} if the query_params is invalid or the API returns a 400 error
+ * @throws {undefined} if the API returns any other error
+ */
+async function fetchData(
+	target_type: "artist" | "release" | "song",
+	query_type: "id" | "keyword",
+	query_params: string | string[] | Set<string> | undefined
+): Promise<unknown[] | undefined> {
+	if (query_params == undefined) return;
+	if (query_params == "") return;
+	if (Array.isArray(query_params)) {
+		query_params = query_params.toString();
+	} else if (query_params instanceof Set) {
+		query_params = [...query_params].toString();
+	}
+	const res = await fetch(
+		`${url}/api?type=${target_type}&${query_type}=${query_params}`
+	);
+	if (res.ok) return res.json() as Promise<unknown[]>;
+	else if (res.status === 400) {
+		const errMsg = await res.text();
+		throw errMsg;
+	} else {
+		throw null;
+	}
+}
+
+export { fetchSongByID, fetchArtistByID, fetchArtistByKeyword, fetchData };
