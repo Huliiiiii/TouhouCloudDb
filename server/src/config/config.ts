@@ -57,4 +57,5 @@ const cfg: Record<string, config> = {
 		log_dir: "TODO",
 	},
 };
+
 export const config = cfg[process?.env?.NODE_ENV ?? "development"];
