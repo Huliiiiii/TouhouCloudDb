@@ -1,7 +1,7 @@
 import express from "express";
-import * as listController from "../controllers/list";
-import * as apiController from "../controllers/api";
-import * as authController from "../controllers/auth";
+import * as listController from "controllers/list";
+import * as apiController from "controllers/api";
+import * as authController from "controllers/auth";
 const router = express.Router();
 
 /**

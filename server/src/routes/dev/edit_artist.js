@@ -22,7 +22,6 @@ router.post("/dev/edit/artist", async (req, res) => {
 			data.related_artist,
 			data.ncm_id ? data.ncm_id : null,
 		];
-		console.log(data);
 		if (!isNaN(data.id)) {
 			data_value.push(data.id);
 			pool.query(

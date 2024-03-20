@@ -1,10 +1,10 @@
-import sequelize from "../database/query";
+import sequelize from "database/query";
 import { Response } from "express";
 
-import ReleaseModel from "../database/models/release";
-import SongModel from "../database/models/song";
+import ReleaseModel from "database/models/release";
+import SongModel from "database/models/song";
 
-import logger from "../utils/logger";
+import logger from "utils/logger";
 
 export const listAlbums = async function (res: Response) {
 	try {

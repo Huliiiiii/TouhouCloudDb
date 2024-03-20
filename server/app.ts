@@ -3,14 +3,14 @@ import express from "express";
 import fs from "fs";
 // import createError from "http-errors";
 import path from "path";
-import config from "./config/config.js";
-import logger from "./utils/logger";
-import webRouter from "./router/web_router.js";
+import config from "config/config.js";
+import logger from "utils/logger.js";
+import webRouter from "./src/router/web_router";
 import * as dotenv from "dotenv";
 dotenv.config();
 const app = express();
 
-import syncDatabase from "./database/sync";
+import syncDatabase from "database/sync";
 
 // 跨域请求
 import cors from "cors";
@@ -50,7 +50,7 @@ app.use(express.urlencoded({ extended: false }));
 // app.use(limiter);
 
 // 路由
-const routes_path = "./routes";
+const routes_path = "./src/routes";
 const loadRoutes = (dir: string) => {
 	const files = fs.readdirSync(dir);
 	files.forEach((file) => {
@@ -58,7 +58,8 @@ const loadRoutes = (dir: string) => {
 		if (fs.statSync(filePath).isDirectory()) {
 			loadRoutes(filePath);
 		} else {
-			app.use("/", require(path.resolve(filePath)));
+			const _path = path.resolve(filePath);
+			app.use("/", require(_path));
 		}
 	});
 };

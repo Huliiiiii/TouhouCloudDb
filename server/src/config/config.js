@@ -1,5 +1,6 @@
 const path = require("path");
-require("dotenv").config({ path: [".env.local", ".env"] });
+const dotenv = require("dotenv");
+dotenv.config({ path: [".env.local", ".env"] });
 
 const cfg = {
 	development: {

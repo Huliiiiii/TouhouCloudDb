@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { UserModel } from "../database/models/user";
+import { UserModel } from "database/models/user";
 export async function login(req: Request, res: Response) {
 	try {
 		if (!req.body.username && !req.body.password) return;

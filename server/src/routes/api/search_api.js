@@ -1,7 +1,6 @@
 const router = require("express").Router();
-const { escapeId } = require("mysql2");
-const { pool } = require("../../functions/query.js");
-const { if_A_Return_B_else_C } = require("../../src/scripts/little_tools.js");
+const { pool } = require("functions/query.js");
+require("scripts/little_tools.js");
 // 测试中用不到这个函数
 /**
  *

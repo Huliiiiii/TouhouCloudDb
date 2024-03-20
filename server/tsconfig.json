@@ -97,5 +97,17 @@
 		/* Language and Environment */
 		"target": "es2016" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
 		"useUnknownInCatchVariables": true /* Default catch clause variables as 'unknown' instead of 'any'. */,
+		"checkJs": false,
+		"paths": {
+			"root/*": ["./*"],
+			"src/*": ["./src/*"],
+			"config/*": ["./src/config/*"],
+			"controllers/*": ["./src/controllers/*"],
+			"database/*": ["./src/database/*"],
+			"functions/*": ["./src/functions/*"],
+			"routes/*": ["./src/routes/*"],
+			"scripts/*": ["./src/scripts/*"],
+			"utils/*": ["./src/utils/*"],
+		},
 	},
 }

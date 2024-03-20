@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { type Request, Response } from "express";
 import { FindAttributeOptions, FindOptions, Model, ModelCtor, Op } from "sequelize";
-import ArtistModel from "../database/models/artist";
-import ReleaseModel from "../database/models/release";
-import SongModel from "../database/models/song";
+import ArtistModel from "database/models/artist";
+import ReleaseModel from "database/models/release";
+import SongModel from "database/models/song";
 
 interface MyGetReq extends Request {
 	query: {
@@ -128,4 +128,18 @@ async function UseKW(req: Request, res: Response, model: ModelCtor<Model<any, an
 	}
 	const result = await model.findAll(option);
 	return res.send(result);
+}
+
+// interface MyPostReq extends Request {
+// 	body: any;
+// }
+
+export function postSong(req: Request, res: Response) {
+	res.send(req.body);
+}
+export function postArtist() {
+	return;
+}
+export function postRelease() {
+	return;
 }
