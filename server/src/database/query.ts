@@ -1,4 +1,4 @@
-import config from "../config/config";
+import { config } from "../config/config";
 import { Sequelize } from "sequelize";
 
 // prettier-ignore

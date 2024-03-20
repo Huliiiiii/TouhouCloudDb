@@ -1,6 +1,6 @@
 import log4js from "log4js";
 import pathLib from "path";
-import config from "config/config.js";
+import { config } from "config/config.js";
 
 const logConfig = {
 	appenders: {

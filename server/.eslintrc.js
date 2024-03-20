@@ -31,6 +31,7 @@ module.exports = {
 			extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended-type-checked", "plugin:@typescript-eslint/stylistic-type-checked", "prettier"],
 			rules: {
 				"@typescript-eslint/no-misused-promises": ["error", { checksVoidReturn: false }],
+				"@typescript-eslint/consistent-type-definitions": "off",
 			},
 		},
 	],

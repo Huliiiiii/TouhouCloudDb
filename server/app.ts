@@ -2,7 +2,7 @@ import cookieParser from "cookie-parser";
 import express from "express";
 import fs from "fs";
 // import createError from "http-errors";
-import config from "config/config.js";
+import { config } from "config/config.js";
 import * as dotenv from "dotenv";
 import path from "path";
 import logger from "utils/logger.js";
@@ -69,21 +69,20 @@ app.use("/", webRouter);
 // app.use(function (req, res, next) {
 // 	next(createError(404));
 // });
-const url = process.env.SERVER_URL;
-const port = process.env.SERVER_PORT;
-
+const host = config.server.host;
+const port = config.server.port;
 // Something only appears in dev or test
-if (process.env.NODE_ENV != "production") {
+if (process.env.NODE_ENV !== "production") {
 	// Sync database models
 	// Sync database before run
 	void syncDatabase().then(() => {
 		app.listen(port, () => {
-			logger.info(`Server running at ${url}:${port}/`);
+			logger.info(`Server running at http://${host}:${port}`);
 		});
 	});
 } else {
 	app.listen(port, () => {
-		logger.info(`Server running at ${url}:${port}/`);
+		logger.info(`Server running at http://${host}:${port}`);
 	});
 }
 
