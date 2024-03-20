@@ -58,8 +58,8 @@ const loadRoutes = (dir: string) => {
 		if (fs.statSync(filePath).isDirectory()) {
 			loadRoutes(filePath);
 		} else {
-			const _path = path.resolve(filePath);
-			app.use("/", require(_path));
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-var-requires
+			app.use("/", require(path.resolve(filePath)));
 		}
 	});
 };
