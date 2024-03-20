@@ -12,7 +12,7 @@ const config = {
 	},
 	options: {
 		type: "ts",
-		dir: "database/models",
+		dir: "database/models/automatic",
 	},
 };
 
