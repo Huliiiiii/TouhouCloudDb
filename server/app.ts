@@ -5,7 +5,7 @@ import fs from "fs";
 import path from "path";
 import config from "./config/config.js";
 import logger from "./utils/logger";
-import webRouter from "./web_router";
+import webRouter from "./router/web_router.js";
 import * as dotenv from "dotenv";
 dotenv.config();
 const app = express();

@@ -1,39 +1,40 @@
-import { Request, Response } from "express";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { type Request, Response } from "express";
 import { FindAttributeOptions, FindOptions, Model, ModelCtor, Op } from "sequelize";
 import ArtistModel from "../database/models/artist";
 import ReleaseModel from "../database/models/release";
 import SongModel from "../database/models/song";
-import logger from "../utils/logger";
-export { GET };
 
-async function GET(req: Request, res: Response): Promise<void> {
+interface MyGetReq extends Request {
+	query: {
+		type?: string;
+		id?: string;
+		keyword?: string;
+	};
+}
+
+export async function GET(req: MyGetReq, res: Response): Promise<any> {
 	try {
-		if (!req.query.type) {
-			res.status(400).end();
-		} else {
-			const type = typeof req.query.type !== "string" ? req.query.type.toString() : req.query.type;
-			DataFetcher(req, res, type);
+		if (!req.query.type && typeof req.query.type !== "string") {
+			return res.status(400).end();
 		}
-	} catch (error) {
-		logger.error(error);
+		return await DataFetcher(req, res, req.query.type);
+	} catch (error: unknown) {
 		// TODO:Handle error
+		return res.status(400).send(error);
 	}
 }
-// TODO: No Anyscript
-const isNumber = function (str: any) {
-	// 0-9, 英文逗号，空格
-	const regex = /^[0-9,\s]+$/;
-	return regex.test(str);
+
+const isNumberString = function (str: string): boolean {
+	if (typeof str !== "string") return false;
+	return !isNaN(parseFloat(str)) && isFinite(parseFloat(str));
 };
 
-const DataFetcher = async function (req: Request, res: Response, type: string): Promise<null | void> {
-	// prettier-ignore
-	if ((!req.query.id && !req.query.keyword) ||
-		(req.query.id && req.query.keyword) ||
-		(req.query.id && !isNumber(req.query.id))) {
-			res.status(400).end();
+async function DataFetcher(req: MyGetReq, res: Response, type: string) {
+	if ((req.query.id && req.query.keyword) ?? (!req.query.id && !req.query.keyword) ?? !isNumberString(req.query.id ?? "null")) {
+		return res.status(400).end();
 	}
-	let model;
+	let model: ModelCtor<Model<any, any>>;
 	switch (type) {
 		case "song":
 			model = SongModel;
@@ -45,26 +46,27 @@ const DataFetcher = async function (req: Request, res: Response, type: string): 
 			model = ReleaseModel;
 			break;
 		default:
-			res.status(400).end();
-			return;
+			return res.status(400).end();
 	}
 	if (req.query.id) {
-		UseID(req, res, model);
+		return await UseID(req, res, model);
 	} else if (req.query.keyword) {
-		UseKW(req, res, model);
+		return await UseKW(req, res, model);
+	} else {
+		return res.status(400).end();
 	}
-};
+}
 
 // 好像这样不是正确的写type方式
 interface option extends FindOptions<any> {
 	attributes: FindAttributeOptions;
 	where: {
 		is_deleted?: "0" | "1";
-		id?: string | string[] | {};
+		id?: string | string[] | object;
 		[Op.or]?: object[];
-		name?: {};
-		name_variant?: {};
-		title?: {};
+		name?: object;
+		name_variant?: object;
+		title?: object;
 	};
 }
 
@@ -77,16 +79,16 @@ const default_option: option = {
 
 // TODO: 将sequelize.define改为更新并适配ts的extends Model方法
 // 见：https://sequelize.org/master/manual/model-basics.html
-const UseID = async function (req: Request, res: Response, model: ModelCtor<Model<any, any>>) {
+async function UseID(req: Request, res: Response, model: ModelCtor<Model<any, any>>) {
 	const id = req.query.id as string;
 	const id_arr = id.split(",");
 	const option = { ...default_option };
 	option.where = { ...option.where, id: id_arr.length === 1 ? id : { [Op.in]: id_arr } };
 	const result = await model.findAll(option);
-	res.send(result);
-};
+	return res.send(result);
+}
 
-const UseKW = async function (req: Request, res: Response, model: ModelCtor<Model<any, any>>) {
+async function UseKW(req: Request, res: Response, model: ModelCtor<Model<any, any>>) {
 	const kw = req.query.keyword as string;
 	const option = { ...default_option };
 	if (!isNaN(Number(kw))) {
@@ -121,8 +123,9 @@ const UseKW = async function (req: Request, res: Response, model: ModelCtor<Mode
 			};
 			break;
 		default:
-			break;
+			// 这种情况不应该发生，但还是做了错误处理
+			return res.status(400).end();
 	}
 	const result = await model.findAll(option);
-	res.send(result);
-};
+	return res.send(result);
+}
