@@ -1,48 +1,46 @@
 {
-	"apidoc": {
-		"version": "1.0.0"
-	},
 	"author": "",
-	"config": {
-		"commitizen": {
-			"path": "./node_modules/cz-conventional-changelog"
-		}
-	},
 	"dependencies": {
 		"cookie-parser": "^1.4.6",
 		"cors": "^2.8.5",
-		"ejs": "^3.1.9",
-		"express": "^4.18.3",
+		"dotenv": "^16.4.5",
+		"express": "^4.19.1",
 		"express-rate-limit": "^7.2.0",
 		"http-errors": "^2.0.0",
-		"joi": "^17.12.2",
 		"log4js": "^6.9.1",
 		"morgan": "^1.10.0",
 		"mysql2": "^3.9.2",
+		"ramda": "^0.29.1",
 		"sequelize": "^6.37.1",
-		"vite-plugin-solid": "^2.10.1"
+		"tslib": "^2.6.2"
 	},
 	"description": "",
 	"devDependencies": {
 		"@types/cookie-parser": "^1.4.7",
 		"@types/cors": "^2.8.17",
-		"@types/ejs": "^3.1.5",
 		"@types/express": "^4.17.21",
 		"@types/http-errors": "^2.0.4",
 		"@types/morgan": "^1.9.9",
+		"@types/node": "^20.11.30",
+		"@types/ramda": "^0.29.11",
 		"apidoc": "^1.2.0",
+		"eslint-plugin-n": "17.0.0-5",
 		"sequelize-automate": "^1.2.2",
 		"sequelize-cli": "^6.6.2",
 		"tsx": "^4.7.1"
 	},
 	"keywords": [],
 	"license": "ISC",
-	"main": "app.ts",
-	"name": "touhouclouddb",
+	"main": "./src/index.ts",
+	"name": "@touhouclouddb/server",
 	"scripts": {
-		"commit": "cz",
 		"dev": "tsx watch ./app.ts",
-		"sequelize-automate": "sequelize-automate -c sequelize-automate.config.js"
+		"sequelize-automate": "sequelize-automate -c ./src/config/sequelize-automate.config.js"
 	},
-	"version": "1.0.0"
+	"version": "1.0.0",
+	"config": {
+		"commitizen": {
+			"path": "./node_modules/cz-conventional-changelog"
+		}
+	}
 }

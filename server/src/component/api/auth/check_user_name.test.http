@@ -1,0 +1,23 @@
+# Normal Username
+POST http://localhost:3007/api/checkusername
+content-type: application/json
+
+{"username": "regular-username"}
+###
+# Too Long Usernamer
+POST http://localhost:3007/api/checkusername
+content-type: application/json
+
+{"username": "toolooooooooooooooooongusername"}
+###
+# Too Short Username
+POST http://localhost:3007/api/checkusername
+content-type: application/json
+
+{"username": "ts"}
+
+### admin
+POST http://localhost:3007/api/checkusername
+content-type: application/json
+
+{"username": "admin"}

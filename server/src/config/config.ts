@@ -21,14 +21,14 @@ const cfg: Record<string, config> = {
 		database: {
 			host: "localhost",
 			username: "root",
-			password: process.env.DATABASE_PASSWORD,
+			password: process.env.DATABASE_PASSWORD!,
 			database_name: "touhoudbtest",
 		},
 		server: {
 			host: "localhost",
 			port: 3007,
 		},
-		log_dir: path.join(__dirname, "..", "logs"),
+		log_dir: path.join(__dirname, "logs"),
 	},
 	test: {
 		database: {
@@ -58,4 +58,4 @@ const cfg: Record<string, config> = {
 	},
 };
 
-export const config = cfg[process?.env?.NODE_ENV ?? "development"];
+export const config = cfg[process?.env?.NODE_ENV ?? "development"]!;

@@ -1,74 +1,55 @@
 import cookieParser from "cookie-parser";
 import express from "express";
-import fs from "fs";
-// import createError from "http-errors";
+import syncDatabase from "component/database/sync";
+import logger from "component/logger/logger";
+import webRouter from "component/router/web_router";
 import { config } from "config/config.js";
+import cors from "cors";
 import * as dotenv from "dotenv";
-import path from "path";
-import logger from "utils/logger.js";
-import webRouter from "./src/router/web_router";
-dotenv.config({ path: [".env.local", ".env"] });
+import morgan from "morgan";
+
 const app = express();
 
-import syncDatabase from "database/sync";
+// 环境变量
+dotenv.config({ path: [".env.local", ".env"] });
 
 // 跨域请求
-import cors from "cors";
-
 app.use(cors());
 
 // 日志
-import morgan from "morgan";
-
 app.use(morgan("dev"));
 
-// 模板引擎
-// eslint-disable-next-line no-unused-vars
-app.set("view engine", "ejs");
-app.set("views", "./views");
-//
+// 解析中间件
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+// extend 为 false 时，值只能为字符串或者数组。当设置为 true，则可以是任意类型
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// 静态资源
-app.use(express.static("./css"));
-app.use("/src", express.static("./src"));
-//
-
-app.use(express.urlencoded({ extended: false }));
-
 // 限流
-// const { rateLimit } = require("express-rate-limit");
-// const limiter = rateLimit({
-// 	windowMs: 15 * 60 * 1000, // 15 minutes
-// 	limit: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
-// 	standardHeaders: "draft-7", // draft-6: `RateLimit-*` headers; draft-7: combined `RateLimit` header
-// 	legacyHeaders: false, // Disable the `X-RateLimit-*` headers.
-// 	// store: ... , // Use an external store for consistency across multiple server instances.
-// });
-// app.use(limiter);
+import { rateLimit } from "express-rate-limit";
+import { errorHandler } from "component/error_handle/error_handler";
+const limeter_time = process.env.NODE_ENV !== "production" ? 0 : 1000 * 60 * 5;
+const limiter = rateLimit({
+	windowMs: limeter_time, // 15 minutes
+	limit: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
+	standardHeaders: "draft-7", // draft-6: `RateLimit-*` headers; draft-7: combined `RateLimit` header
+	legacyHeaders: false, // Disable the `X-RateLimit-*` headers.
+	// store: ... , // Use an external store for consistency across multiple server instances.
+});
+app.use(limiter);
 
 // 路由
-const routes_path = "./src/routes";
-const loadRoutes = (dir: string) => {
-	const files = fs.readdirSync(dir);
-	files.forEach((file) => {
-		const filePath = path.join(dir, file);
-		if (fs.statSync(filePath).isDirectory()) {
-			loadRoutes(filePath);
-		} else {
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-var-requires
-			app.use("/", require(path.resolve(filePath)));
-		}
-	});
-};
-loadRoutes(routes_path);
 app.use("/", webRouter);
 
-// app.use(function (req, res, next) {
-// 	next(createError(404));
-// });
+// 404 Not Found
+app.use(function notFoundHandler(_req, res, _next) {
+	res.status(404).send();
+});
+
+// 错误处理
+app.use(errorHandler);
+
+// 启动
 const host = config.server.host;
 const port = config.server.port;
 // Something only appears in dev or test
@@ -85,15 +66,3 @@ if (process.env.NODE_ENV !== "production") {
 		logger.info(`Server running at http://${host}:${port}`);
 	});
 }
-
-// error handler
-// Ctrl + C的代码还没搞明白怎么用
-// app.use(function (err, req, res, next) {
-//     // set locals, only providing error in development
-//     res.locals.message = err.message;
-//     res.locals.error = req.app.get("env") === "development" ? err : {};
-
-//     // render the error page
-//     res.status(err.status || 500);
-//     res.render("error");
-// });
