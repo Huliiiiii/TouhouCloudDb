@@ -3,7 +3,7 @@
 // import "./models/song";
 
 import sequelize from "./query";
-import logger from "component/logger/logger";
+import { logger } from "component/logger/logger";
 
 const syncDatabase = async (): Promise<void> => {
 	try {

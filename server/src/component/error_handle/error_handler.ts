@@ -1,4 +1,4 @@
-import logger from "component/logger/logger";
+import { logger } from "component/logger/logger";
 import { Request, Response, NextFunction, ErrorRequestHandler } from "express";
 
 function errorHandlingFunction(
