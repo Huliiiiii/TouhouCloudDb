@@ -28,7 +28,7 @@ const cfg: Record<string, config> = {
 			host: "localhost",
 			port: 3007,
 		},
-		log_dir: path.join(__dirname, "logs"),
+		log_dir: path.resolve("logs"),
 	},
 	test: {
 		database: {

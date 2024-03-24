@@ -26,10 +26,6 @@ const logConfig = {
 	},
 };
 
-interface myLogger extends log4js.Logger {
-	info: (message: unknown, ...args: unknown[]) => void;
-	error: (message: unknown, ...args: unknown[]) => void;
-}
-const logger = log4js.configure(logConfig).getLogger() as myLogger;
+const logger = log4js.configure(logConfig).getLogger();
 
 export default logger;
