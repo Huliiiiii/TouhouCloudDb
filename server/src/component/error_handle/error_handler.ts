@@ -9,9 +9,9 @@ function errorHandlingFunction(
 ) {
 	logger.error(err);
 	if (err instanceof Error) {
-		return res.status(400).json({ success: false, message: err.message });
+		return res.status(500).json({ success: false, message: err.message });
 	} else {
-		return res.status(400).json({ success: false, message: err });
+		return res.status(500).json({ success: false, message: err });
 	}
 }
 
