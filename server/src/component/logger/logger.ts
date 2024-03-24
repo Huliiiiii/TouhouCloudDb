@@ -2,7 +2,7 @@ import log4js from "log4js";
 import pathLib from "path";
 import { config } from "config/config.js";
 
-const logConfig = {
+const loggerConfig: log4js.Configuration = {
 	appenders: {
 		debug: {
 			type: "console",
@@ -26,4 +26,4 @@ const logConfig = {
 	},
 };
 
-export const logger = log4js.configure(logConfig).getLogger();
+export const logger = log4js.configure(loggerConfig).getLogger();
