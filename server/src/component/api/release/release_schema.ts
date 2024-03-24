@@ -5,7 +5,8 @@ import {
 	regular_Number_Schema,
 	titleSchema,
 	artistNameSchema,
-} from "../data_schema";
+	isDeletedSchema,
+} from "../music_data_schema";
 
 //
 
@@ -33,27 +34,35 @@ export const releaseFormatCompiler = TypeCompiler.Compile(releaseFormatSchema);
 
 // TODO
 
-export const publisherSchema = idArraySchema;
+export const publisherSchema = Type.Union([
+	idArraySchema,
+	Type.Null(),
+	Type.Undefined(),
+]);
 export type Publisher = Static<typeof publisherSchema>;
 export const publisherCompiler = TypeCompiler.Compile(publisherSchema);
 
 // TODO
 
-export const catalogNumSchema = Type.String();
+export const catalogNumSchema = Type.Union([
+	Type.String(),
+	Type.Null(),
+	Type.Undefined(),
+]);
 export type CatalogNum = Static<typeof catalogNumSchema>;
 export const catalogNumCompiler = TypeCompiler.Compile(catalogNumSchema);
 
 // TODO
 
-export const trackListingSchema = Type.Array(Unknown());
+export const trackListingSchema = Type.Union([
+	Type.Array(Unknown()),
+	Type.Null(),
+	Type.Undefined(),
+]);
 export type TrackListing = Static<typeof trackListingSchema>;
 export const trackListingCompiler = TypeCompiler.Compile(trackListingSchema);
 
 //
-
-export const isDeleteSchema = Type.Number({ minimum: 0, maximum: 1 });
-export type isDeleted = 0 | 1;
-export const isDeleteCompiler = TypeCompiler.Compile(isDeleteSchema);
 
 //
 
@@ -70,8 +79,8 @@ export const releaseSchema = Type.Object({
 	track_listing: trackListingSchema,
 	classfier: Unknown(),
 	ncm_id: Type.Number(),
-	is_deleted: isDeleteSchema,
+	is_deleted: isDeletedSchema,
 });
 
-export type IRelease = Static<typeof releaseSchema>;
+export type Release = Static<typeof releaseSchema>;
 export const releaseCompiler = TypeCompiler.Compile(releaseSchema);

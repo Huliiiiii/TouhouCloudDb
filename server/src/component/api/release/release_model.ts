@@ -6,31 +6,15 @@ import {
 	InferCreationAttributes,
 	Model,
 } from "sequelize";
-import { IRelease } from "./release_schema";
+import { type Release } from "./release_schema";
 
 export interface ReleaseModel
-	extends Pick<
-		IRelease,
-		| "title"
-		| "release_artist"
-		| "release_type"
-		| "release_format"
-		| "is_deleted"
-	> {}
-export interface ReleaseModel
-	extends Model<
-		InferAttributes<ReleaseModel>,
-		InferCreationAttributes<ReleaseModel>
-	> {
+	extends Omit<Release, "id">,
+		Model<
+			InferAttributes<ReleaseModel>,
+			InferCreationAttributes<ReleaseModel>
+		> {
 	id: CreationOptional<number>;
-	override_credit_name: CreationOptional<string>;
-	// TODO
-	release_date: CreationOptional<String>;
-	publisher: CreationOptional<Number[]>;
-	catalog_num: CreationOptional<String>;
-	track_listing: CreationOptional<Array<unknown>>;
-	classfier: CreationOptional<Array<unknown>>;
-	ncm_id: CreationOptional<Number>;
 }
 
 export const ReleaseModel = sequelize.define<ReleaseModel>(

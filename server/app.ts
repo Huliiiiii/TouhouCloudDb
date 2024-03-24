@@ -1,7 +1,7 @@
 import cookieParser from "cookie-parser";
 import express from "express";
 import syncDatabase from "component/database/sync";
-import logger from "component/logger/logger";
+import { logger } from "component/logger/logger";
 import webRouter from "component/router/web_router";
 import { config } from "config/config.js";
 import cors from "cors";
@@ -43,7 +43,7 @@ app.use("/", webRouter);
 
 // 404 Not Found
 app.use(function notFoundHandler(_req, res, _next) {
-	res.status(404).send();
+	res.status(404).end();
 });
 
 // 错误处理

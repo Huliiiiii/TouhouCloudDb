@@ -1,0 +1,22 @@
+### 正常KW, 返回lovelight
+GET http://localhost:3007/api/release?keyword=love
+### 正常ID, 返回lovelight
+GET http://localhost:3007/api/release?id=1
+### 作为Keyword的ID, 返回lovelight
+GET http://localhost:3007/api/release?keyword=1
+
+### 数字KW
+GET http://localhost:3007/api/release?keyword=1234111%201
+
+### ID
+GET http://localhost:3007/api/release?id=114514
+
+### 带空格的id
+GET http://localhost:3007/api/release?id=1234111%201
+
+
+### 同时带有ID和KW的请求, 优先返回id
+GET http://localhost:3007/api/release?id=1&keyword=12345
+
+### 带有额外键的请求
+GET http://localhost:3007/api/release?id=1&foo=12345
