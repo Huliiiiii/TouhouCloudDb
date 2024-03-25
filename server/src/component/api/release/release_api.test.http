@@ -11,12 +11,15 @@ GET http://localhost:3007/api/release?keyword=1234111%201
 ### ID
 GET http://localhost:3007/api/release?id=114514
 
-### 带空格的id
+### 负数ID, 返回Expected Value
+GET http://localhost:3007/api/release?id=-114514
+
+### 带空格的id, 返回Expected Value
 GET http://localhost:3007/api/release?id=1234111%201
 
 
-### 同时带有ID和KW的请求, 优先返回id
+### 同时带有ID和KW的请求, 返回Invalid Request
 GET http://localhost:3007/api/release?id=1&keyword=12345
 
-### 带有额外键的请求
+### 带有额外键的请求, 返回Invalid Request
 GET http://localhost:3007/api/release?id=1&foo=12345

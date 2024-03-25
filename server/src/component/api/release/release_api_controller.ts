@@ -22,7 +22,10 @@ export async function getReleaseDataController(
 		}
 		const options = getOptions(req.query);
 		const relesaeData = await ReleaseModel.findAll(options);
-		res.send({ success: true, data: relesaeData });
+		res.send({
+			success: true,
+			data: relesaeData.length !== 0 ? relesaeData : null,
+		});
 	} catch (error) {
 		next(error);
 	}
