@@ -1,7 +1,7 @@
-import { debounce } from "lodash";
-import { For, createResource, createSignal, onMount } from "solid-js";
+import { For, createSignal, onMount } from "solid-js";
 import { createStore } from "solid-js/store";
-import { fetchArtistByID, fetchArtistByKeyword } from "./fetch_data_functions";
+import AddArtistCompoment from "../../compoments/edit_page_search_artist";
+import { fetchArtistByID } from "./fetch_data_functions";
 
 interface artist_data {
 	id: number | string;
@@ -20,8 +20,7 @@ interface song_data {
 
 export default function EditSongArtist(props: { song_data: song_data | null }) {
 	const [songArtist, setSongArtist] = createStore<artist_data[]>([]);
-	const [getArtistInput, setArtistInput] = createSignal("");
-	const [artist_result, { refetch }] = createResource(getArtistInput, fetchArtistByKeyword);
+
 	onMount(async () => {
 		if (props.song_data) {
 			let artist_data: artist_data[] = await fetchArtistByID(props.song_data.artist);
@@ -46,13 +45,24 @@ export default function EditSongArtist(props: { song_data: song_data | null }) {
 			alert("Song artist already exist");
 		}
 	}
+
+	const [inputLock, setInputLock] = createSignal<boolean>(true);
+
 	true && updateArtistResult;
 	function updateArtistResult(el: HTMLInputElement) {
-		const func1 = async () => {
-			setArtistInput(el.value);
-			refetch();
-		};
-		el.addEventListener("input", debounce(func1, 400));
+		// el.addEventListener("compositionstart", () => setInputLock(true));
+		// el.addEventListener("compositionend", () => setInputLock(false));
+		// // el.addEventListener("input", debounce(func1, 400));
+		// el.addEventListener("input", () => {
+		// 	if (inputLock() === true) {
+		// 		console.log(inputLock());
+		// 		return;
+		// 	} else {
+		// 		console.log(inputLock());
+		// 		setArtistInput(el.value);
+		// 		refetch();
+		// 	}
+		// });
 	}
 
 	const removeSongArtist = function (artist: artist_data) {
@@ -68,7 +78,7 @@ export default function EditSongArtist(props: { song_data: song_data | null }) {
 				<table style={{ display: "flex" }}>
 					<tbody>
 						<tr>
-							<td>Artist </td>
+							<td>Artist Name</td>
 						</tr>
 						<For each={songArtist}>
 							{(artist: artist_data, index) => (
@@ -88,25 +98,7 @@ export default function EditSongArtist(props: { song_data: song_data | null }) {
 							)}
 						</For>
 					</tbody>
-					<tbody>
-						<tr>
-							<td>搜索艺术家</td>
-						</tr>
-						<tr>
-							<td>
-								<input type="text" use:updateArtistResult />
-							</td>
-						</tr>
-						<For each={artist_result()}>
-							{(artist) => (
-								<tr>
-									<td style={{ border: "1px solid black" }} onClick={[addSongArtistInput, artist]}>
-										{artist.name}
-									</td>
-								</tr>
-							)}
-						</For>
-					</tbody>
+					<AddArtistCompoment label="添加发行艺术家" addInput={addSongArtistInput} />
 				</table>
 			</div>
 		</>

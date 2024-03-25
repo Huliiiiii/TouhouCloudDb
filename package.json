@@ -1,19 +1,5 @@
 {
-	"devDependencies": {
-		"@types/lodash": "^4.14.202",
-		"@types/node": "^20.11.24",
-		"@types/ramda": "^0.29.11",
-		"commitizen": "^4.3.0",
-		"cz-conventional-changelog": "^3.3.0",
-		"eslint": "^8.57.0",
-		"eslint-config-prettier": "^9.1.0",
-		"prettier": "3.2.4",
-		"typescript": "^5.3.3",
-		"typescript-eslint": "^7.1.1"
-	},
-	"scripts": {
-		"commit": "cz"
-	},
+	"author": "",
 	"config": {
 		"commitizen": {
 			"path": "./node_modules/cz-conventional-changelog"
@@ -26,5 +12,29 @@
 		"ramda": "^0.29.1",
 		"tslib": "^2.6.2",
 		"zod": "^3.22.4"
-	}
+	},
+	"description": "",
+	"devDependencies": {
+		"@types/lodash": "^4.14.202",
+		"@types/node": "^20.11.24",
+		"@types/ramda": "^0.29.11",
+		"commitizen": "^4.3.0",
+		"cz-conventional-changelog": "^3.3.0",
+		"eslint": "^8.57.0",
+		"eslint-config-prettier": "^9.1.0",
+		"mocha": "^10.3.0",
+		"prettier": "3.2.4",
+		"typescript": "^5.4.2",
+		"typescript-eslint": "^7.3.1"
+	},
+	"keywords": [],
+	"license": "ISC",
+	"main": "index.js",
+	"name": "touhouclouddb",
+	"private": true,
+	"version": "1.0.0",
+	"workspaces": [
+		"client",
+		"server"
+	]
 }

@@ -1,87 +1,38 @@
 /* @refresh reload */
 import { render } from "solid-js/web";
-import { Route, Router } from "@solidjs/router";
-import { lazy, ErrorBoundary } from "solid-js";
+import { Route, Router, redirect, useNavigate } from "@solidjs/router";
+import { ErrorBoundary, JSXElement, createEffect, lazy } from "solid-js";
+
+import { Header } from "compoments/Headder.tsx";
+import { route_config } from "src/route_config";
 import "./index.css";
+import "./app.css";
+import HomePage from "./homepage";
 
-const routes = [
-	{
-		path: "/",
-		component: lazy(() => import("/src/homepage"))
-	},
-	{
-		path: "/add",
-		children: [
-			{
-				path: "/release",
-				component: lazy(() => import("/src/routes/add/add_release"))
-			}
-		]
-	},
-	{
-		path: "/update",
-		children: [
-			{
-				path: "/release/:ID",
-				component: lazy(() => import("/src/routes/add/add_release"))
-			}
-		]
-	},
-	{
-		path: "/list",
-		children: [
-			{
-				path: "/albums",
-				component: lazy(() => import("/src/routes/list/AlbumList"))
-			}
-		]
-	},
-	{
-		path: "/dev",
-		children: [
-			{
-				path: "/edit/release/:id?",
-				component: lazy(() => import("/src/routes/dev/edit_release"))
-			},
-			{
-				path: "/edit/artist/:id?",
-				component: lazy(() => import("/src/routes/dev/edit_artist"))
-			},
-			{
-				path: "/edit/song/:id?",
-				component: lazy(() => import("/src/routes/dev/edit_song"))
-			},
-			{
-				path: "/list/song",
-				component: lazy(() => import("/src/routes/dev/list_song"))
-			},
-			// {
-			// 	path: "/test",
-			// 	component: lazy(() => import("/src/routes/dev/test"))
-			// }
-		]
-	}
-];
-
-function App() {
+const Root = (props: any) => {
 	return (
-		<>
+		<div class="flex flex-col justify-center">
+			<Header />
 			<ErrorBoundary fallback={(err) => err}>
-				<div style={{ height: "10%" }}>
-					<button
-						onClick={() => {
-							window.location.href = "/";
-						}}
-					>
-						return
-					</button>
-				</div>
-				<Router>
-					<Route>{routes}</Route>
-					<Route path="*" component={() => <div>404 Not Found</div>} />
-				</Router>
+				<div class="flex justify-center">{props.children}</div>
 			</ErrorBoundary>
-		</>
+			<div>Footer</div>
+		</div>
 	);
-}
+};
+
+const RouteGuard = () => {
+	return <></>;
+};
+const loginPage = lazy(() => import("./routes/SignIn.tsx"));
+const App = () => {
+	return (
+		<Router root={Root}>
+			<Route path="/" component={HomePage} />
+			<Route>{route_config}</Route>
+			<Route path="*" component={() => <div>404 Not Found</div>} />
+		</Router>
+	);
+};
+
 render(App, document.getElementById("root")!);

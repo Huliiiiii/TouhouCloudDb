@@ -1,0 +1,9 @@
+dist
+node_modules
+public
+doc
+.husky
+.vscode
+.idea
+*.sh
+*.md
