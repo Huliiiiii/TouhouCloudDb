@@ -25,7 +25,6 @@ export type IDArray = Static<typeof idArraySchema>;
 export const idArrayCompiler = TypeCompiler.Compile(idArraySchema);
 
 // TODO: 正则表达式过滤掉不合法的请求
-
 export const idQuerySchema = Type.String({
 	minLength: 1,
 	maxLength: 10,
@@ -34,21 +33,28 @@ export const idQuerySchema = Type.String({
 export type IDQuery = Static<typeof idQuerySchema>;
 export const idQueryCompiler = TypeCompiler.Compile(idQuerySchema);
 
+export const IDQueryObjectSchema = Type.Object(
+	{
+		id: idQuerySchema,
+	},
+	{
+		additionalProperties: false,
+	}
+);
+export type IDQueryObject = Static<typeof IDQueryObjectSchema>;
+export const IDQueryObjectCompiler = TypeCompiler.Compile(IDQueryObjectSchema);
+
+//
 export const keywordQuerySchema = keywordSchema;
 export type KeywordQuery = Static<typeof keywordQuerySchema>;
 export const keywordQueryCompiler = TypeCompiler.Compile(keywordQuerySchema);
 
-export const IDQueryObjectSchema = Type.Object({
-	id: idQuerySchema,
-});
-
-export type IDQueryObject = Static<typeof IDQueryObjectSchema>;
-export const IDQueryObjectCompiler = TypeCompiler.Compile(IDQueryObjectSchema);
-
-export const keywordQueryObjectSchema = Type.Object({
-	keyword: keywordQuerySchema,
-});
-
+export const keywordQueryObjectSchema = Type.Object(
+	{
+		keyword: keywordQuerySchema,
+	},
+	{ additionalProperties: false }
+);
 export type KeywordQueryObject = Static<typeof keywordQueryObjectSchema>;
 export const keywordQueryObjectCompiler = TypeCompiler.Compile(
 	keywordQueryObjectSchema
